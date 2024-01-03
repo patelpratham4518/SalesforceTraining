@@ -7,20 +7,56 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">    
     <style>
         .main{
-            background-color: bisque;
+            background-color:blanchedalmond;
             position: fixed;
             width: 300px;
             margin-left: 35%;
             margin-top: 5%;
+            border-radius: 5px;
+            
+        }
+        .input{
+            margin-left: 5%;
+            width: 90%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color:cornsilk;
+            border-color:beige;
+        }
+        #submit{
+            margin-left: 5%;
+            width: 90%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .label{
+            margin-left: 3%;
+            color: black;
+            font-size: 20px;
+            
         }
     </style>
 </head>
 <body>
     <div class="main">
-        <div class="form-group">
-
-            <input type="text"  placeholder="Your Name *">
+        <br>
+        <div class="label">
+            Candidate Info
         </div>
+        <input type="text" placeholder="Your Name*" class="input">
+        <input type="email" placeholder="Your Email*" class="input">
+        <textarea name="" id="" cols="30" rows="3" class="input" placeholder="About Yourself"></textarea>
+        <div class="label">Interest</div>
+        <select class="input" name="" id="">
+            <option value="Fishkeeping">Fishkeeping</option>
+            <option value="Cricket">Cricket</option>
+            <option value="Singing">Singing</option>
+        </select>
+        <div class="label">Additional Info</div>
+        <textarea name="" id="" cols="30" rows="3" class="input" placeholder="About your School"></textarea>
+        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
     </div>
+
 </body>
 </html>
