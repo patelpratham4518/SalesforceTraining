@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <style>
+        .container{
+            background-color: red;
+            height: 150px;
+        }
+        .box1{
+            background-color: aqua;
+            height: 150px;
+            width: 150px;
+            position: relative;
+            animation-name: an1;
+            animation-duration: 5s;
+            animation-iteration-count: 3;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in-out;
+        }
+        @keyframes an1{
+            from{
+                width: 0;
+            }
+            to{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">
+        </div>
+    </div>
+</body>
+</html>
