@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create account</title>
+    <style>
+        label{
+            color: green;
+        }
+        .p{
+            display: inline-block;
+            width: 100%;
+        }
+        .c1{
+            width: 50%;
+            float: left;
+        }
+        .c2{
+            width: 50%;
+            float: right;
+        }
+        #email{
+            width: 63%;
+        }
+        h1{
+            text-align: center;
+        }
+        
+    </style>
+        <script type="module">
+          // Import the functions you need from the SDKs you need
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+          import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+          // TODO: Add SDKs for Firebase products that you want to use
+          // https://firebase.google.com/docs/web/setup#available-libraries
+        
+          // Your web app's Firebase configuration
+          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+          const firebaseConfig = {
+            apiKey: "AIzaSyAKg3uKpgU0lKGGKxFDUIobphfNoLIs-F0",
+            authDomain: "training-19952.firebaseapp.com",
+            projectId: "training-19952",
+            storageBucket: "training-19952.appspot.com",
+            messagingSenderId: "837736914538",
+            appId: "1:837736914538:web:20f15f72326439521ff413",
+            measurementId: "G-JN8E2LBWJF"
+          };
+        
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          const analytics = getAnalytics(app);
+        </script>
+  
+</head>
+<body>
+    <form action="">
+        <div class="header">
+            <h1>Create Account</h1>
+        </div>
+        <hr>
+        <br>
+        <div class="main">
+            <div class="p">
+                <div class="c1">
+                    <label for="firstname">First name*</label>
+                    <br>
+                    <input type="text" placeholder="enter your first name" id="firstname">
+                </div>
+                <div class="c2">
+                    <label for="lastname">Last name</label>
+                    <br>
+                    <input type="text" placeholder="enter your last name" id="lastname">        
+                </div>
+            </div>
+            <label for="email">Email*</label>
+            <br>
+            <input type="email" placeholder="enter your email" id="email">
+            <br>
+            <div class="p">
+                <div class="c1">
+                    <label for="pwd">Password*</label>
+                    <br>
+                    <input type="password" id="password" placeholder="enter your password">
+                </div>
+                <div class="c2">
+                    <label for="confirmpwd">Confirm Password</label>
+                    <br>
+                    <input type="password" id="confirmpwd" placeholder="enter your password again">
+                </div>
+            </div>
+            <br>
+            <div class="p">
+                <div class="c1">
+                    <label for="gender">Gender:</label>
+                    <br>
+                    <input type="radio" value="male" id="male" name="gender">
+                    <label for="male">Male</label>
+                    <input type="radio" value="female" id="female" name="gender">
+                    <label for="female">Female</label>
+                </div>
+                <div class="c2">
+                    <label for="hobbies">Hobbies</label>
+                    <br>
+                    <input type="checkbox" name="hobbies" id="music" value="music">
+                    <label for="music">Music</label>
+                    <input type="checkbox" name="hobbies" id="sports" value="sports">
+                    <label for="sports">Sports</label>
+                    <input type="checkbox" name="hobbies" id="travel" value="travel">
+                    <label for="travel">Travel</label>
+                    <input type="checkbox" name="hobbies" id="movies" value="movies">
+                    <label for="movies">Movies</label>        
+                </div>
+            </div>
+            <br>
+            <div class="p">
+                <div class="c1">
+                    <label for="sourceOfIncome">Source of Income</label>
+                    <br>
+                    <select name="sourceOfIncome" id="sourceOfIncome">
+                        <option value="Employed">Employed</option>
+                        <option value="Business">Business</option>
+                        <option value="Student">Student</option>
+                        <option value="Unemployed">Unemployed</option>
+                    </select>        
+                </div>
+                <div class="c2">
+                    <label for="Income">Income</label>
+                    <br>
+                    <input type="range" id="Income" min="10000" max="100000" name="Income" value="Income">
+                            
+                </div>
+            </div>
+            <br>
+            <div class="p">
+                <div class="c1">
+                    <label for="profile">Upload Profile Picture</label>
+                    <br>
+                    <input type="file" value="Choose File" id="profile">        
+                </div>
+                <div class="c2">
+                    <label for="age">Age</label>
+                    <br>
+                    <input type="number" id="age">        
+                </div>
+            </div>
+            <br>
+            <label for="bio">Bio</label>
+            <br>
+            <textarea name="" id="bio" cols="30" rows="7"></textarea>
+        </div>
+        <br>
+        <hr>
+        <div class="footer">
+            <input type="submit" value="Create">
+        </div>
+    </form>
+</body>
+</html>
