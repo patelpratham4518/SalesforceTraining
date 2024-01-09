@@ -60,7 +60,10 @@ DB.on("value", function(snapshot) {
         let view = document.createElement("button")
         view.type = "button"
         view.innerText = "View Product"
-        view.onclick = viewProduct
+        // view.onclick = viewProduct
+        view.onclick = function(){
+          viewProduct(product["image"])
+        }
         productpricebtn1.appendChild(view)
         productInfo.appendChild(productpricebtn1)
         
@@ -77,7 +80,9 @@ DB.on("value", function(snapshot) {
         let addCart = document.createElement("button")
         addCart.type = "button"
         addCart.innerText = "Add to cart"
-        addCart.onclick = addToCart
+        // addCart.onclick = addToCart
+        addCart.onclick = function(){addToCart(product)}
+        
         productpricebtn2.appendChild(addCart)
         productInfo.appendChild(productpricebtn2)
         
@@ -103,13 +108,27 @@ DB.on("value", function(snapshot) {
     console.log("Error: " + error.code);
  });
 
- function viewProduct(){
-    console.log("view product")
+ function viewProduct(img){
+    img.width = 100 + "%"
+    console.log(img)
+    return img
  }
 
  let counter = Number(document.getElementById("count").innerText)
- function addToCart(){
+ let cart = []
+ function addToCart(product){
     counter += 1
     document.getElementById("count").innerText = counter
+    // alert("Item Added to Cart")
+    let item = {productname : product["productname"],price : product["price"]}
+    cart.push(item)
+    sessionStorage.setItem("counter",counter)
+    // console.log(product)
+  }
+  
+  function openCart(){
+    window.location.href = "Cart.html"
+    console.log(sessionStorage.getItem("counter"))
+
  }
  
