@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch</title>
+</head>
+<body>
+    <label for="time">Select Time : <input type="time" id="time"></label>
+    <br>
+    <button type="submit" onclick="submit()">Submit</button>
+    <br>
+    <label for="remaining">Time remaining till Lunch :  <input type="text" id="remaining" disabled></label>
+    <script>
+        const submit = () => {
+            const time = document.getElementById("time").value
+            const hours = Number(time.split(":")[0])
+            const minutes = Number(time.split(":")[1])
+            const totalMinutes = (60*hours) + minutes
+            let remainingMinutes = 0
+
+            if(totalMinutes>=13*60 && totalMinutes<14*60){
+                remainingMinutes = 0
+            }
+            else if(totalMinutes<13*60){
+
+                remainingMinutes =  (13*60) -totalMinutes
+            }
+            else if(totalMinutes>=14*60){
+                remainingMinutes = ((24*60)-totalMinutes)+(13*60)
+            }
+            
+            const remainingHours = parseInt(remainingMinutes/60)
+            const remainingMinutesAfter = remainingMinutes%60
+            document.getElementById("remaining").value = remainingHours + ":" + remainingMinutesAfter
+           
+        }
+    </script>
+</body>
+</html>

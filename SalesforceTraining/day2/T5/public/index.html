@@ -29,33 +29,10 @@
         }
         
     </style>
-        <script type="module">
-          // Import the functions you need from the SDKs you need
-          import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-          import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-          // TODO: Add SDKs for Firebase products that you want to use
-          // https://firebase.google.com/docs/web/setup#available-libraries
         
-          // Your web app's Firebase configuration
-          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-          const firebaseConfig = {
-            apiKey: "AIzaSyAKg3uKpgU0lKGGKxFDUIobphfNoLIs-F0",
-            authDomain: "training-19952.firebaseapp.com",
-            projectId: "training-19952",
-            storageBucket: "training-19952.appspot.com",
-            messagingSenderId: "837736914538",
-            appId: "1:837736914538:web:20f15f72326439521ff413",
-            measurementId: "G-JN8E2LBWJF"
-          };
-        
-          // Initialize Firebase
-          const app = initializeApp(firebaseConfig);
-          const analytics = getAnalytics(app);
-        </script>
-  
 </head>
 <body>
-    <form action="">
+    <form action="" id="form">
         <div class="header">
             <h1>Create Account</h1>
         </div>
@@ -66,23 +43,23 @@
                 <div class="c1">
                     <label for="firstname">First name*</label>
                     <br>
-                    <input type="text" placeholder="enter your first name" id="firstname">
+                    <input type="text" placeholder="enter your first name" id="firstname" value="">
                 </div>
                 <div class="c2">
                     <label for="lastname">Last name</label>
                     <br>
-                    <input type="text" placeholder="enter your last name" id="lastname">        
+                    <input type="text" placeholder="enter your last name" id="lastname" value="">        
                 </div>
             </div>
             <label for="email">Email*</label>
             <br>
-            <input type="email" placeholder="enter your email" id="email">
+            <input type="email" placeholder="enter your email" id="email" value="">
             <br>
             <div class="p">
                 <div class="c1">
                     <label for="pwd">Password*</label>
                     <br>
-                    <input type="password" id="password" placeholder="enter your password">
+                    <input type="password" id="password" placeholder="enter your password" value="">
                 </div>
                 <div class="c2">
                     <label for="confirmpwd">Confirm Password</label>
@@ -95,9 +72,9 @@
                 <div class="c1">
                     <label for="gender">Gender:</label>
                     <br>
-                    <input type="radio" value="male" id="male" name="gender">
+                    <input type="radio" value="male" id="gender" value="male" name="gender">
                     <label for="male">Male</label>
-                    <input type="radio" value="female" id="female" name="gender">
+                    <input type="radio" value="female" id="gender" name="gender" value="female">
                     <label for="female">Female</label>
                 </div>
                 <div class="c2">
@@ -153,8 +130,11 @@
         <br>
         <hr>
         <div class="footer">
-            <input type="submit" value="Create">
+            <button type="submit">Create</button>
         </div>
     </form>
+    
+    <script src    ="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

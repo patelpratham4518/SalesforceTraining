@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+</head>
+<body>
+    <label for="startDate">Start Date :</label>
+    <input type="date" id="startDate">
+    <br>
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate">
+    <br>
+    <button type="submit" onclick="submit()">Submit</button>
+    <br>
+    <label for="outPut">Remaining Days : <input type="text" id="outPut" disabled></label>
+    <script>
+
+        const submit = () => {
+            const startDate = new Date(document.getElementById("startDate").value)
+            const endDate = new Date(document.getElementById("endDate").value)
+            const reaminingSeconds = endDate.getTime() - startDate.getTime()
+            const remainingDays = reaminingSeconds/(24*3600*1000)
+            document.getElementById("outPut").value = remainingDays + "  Days"    
+    }
+    </script>
+</body>
+</html>

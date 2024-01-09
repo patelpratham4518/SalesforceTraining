@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reoccur</title>
+</head>
+<body>
+    <label for="input">UploadFile : <input type="file" id="fileToLoad"></label>
+    <button type="submit" onclick="onSubmit()">Submit</button>
+    <br>
+    <label for="output">First reoccurences in a word:</label>
+    <br>
+    <textarea name="" id="fileData" cols="30" rows="5" disabled></textarea>
+    <br>
+    <textarea name="" id="output" cols="30" rows="5" disabled></textarea>
+    <script>
+    const firstreoccur = (str) =>{
+    let prev = ""
+    for(let i=0; i<str.length;i++){
+        if(prev.includes(str[i])){
+            // const letter = str[i]
+            // const obj = { [str[i]]: [i,str.indexOf(str[i])]}
+            const map = new Map()
+            map.set("reoccur",[str[i],i,str.indexOf(str[i])])
+            return map
+            break
+        }
+        prev += str[i]
+    }
+}
+
+
+
+const gettingReoccurences = (data) =>{
+    let res = ""
+    const x = data.split(" ")
+    for(i of x){
+        res += firstreoccur(i).get("reoccur").toString()+"\n"
+    }
+    document.getElementById("output").value = res
+}
+    const onSubmit = () =>{
+        let inputData = ""
+        var fileToLoad = document.getElementById("fileToLoad").files[0];
+        
+        var fileReader = new FileReader();
+        fileReader.onload = function(fileLoadedEvent){
+            var textFromFileLoaded = fileLoadedEvent.target.result;
+            inputData = textFromFileLoaded;
+            // console.log(inputData)
+            document.getElementById("fileData").value = inputData
+            // try {
+            //     gettingReoccurences(inputData)
+            // } catch (error) {
+            //     console.log(error);
+            // }
+        };
+        fileReader.readAsText(fileToLoad, "UTF-8");
+        
+        
+        let x = document.getElementById("fileData").value
+        console.log(x)
+        gettingReoccurences("“BTEJHBERSD” “JPDETRETXD”")
+       
+    }
+
+
+    </script>
+</body>
+</html>
