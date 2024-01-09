@@ -107,7 +107,9 @@ DB.on("value", function(snapshot) {
     console.log("view product")
  }
 
+ let counter = Number(document.getElementById("count").innerText)
  function addToCart(){
-  console.log("add to cart")
+    counter += 1
+    document.getElementById("count").innerText = counter
  }
  
