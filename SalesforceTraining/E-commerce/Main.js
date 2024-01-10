@@ -114,21 +114,26 @@ DB.on("value", function(snapshot) {
     return img
  }
 
+ document.getElementById("count").innerText = sessionStorage.getItem("counter")
  let counter = Number(document.getElementById("count").innerText)
+
+//  let cart = sessionStorage.getItem("cart")
  let cart = []
+
  function addToCart(product){
     counter += 1
     document.getElementById("count").innerText = counter
     // alert("Item Added to Cart")
-    let item = {productname : product["productname"],price : product["price"]}
+    let item = [ product["productname"], product["price"]]
     cart.push(item)
     sessionStorage.setItem("counter",counter)
-    // console.log(product)
+    sessionStorage.setItem("cart",cart)
+    console.log(cart)
   }
   
   function openCart(){
     window.location.href = "Cart.html"
-    console.log(sessionStorage.getItem("counter"))
-
  }
+
+ 
  
