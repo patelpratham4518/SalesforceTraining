@@ -9,7 +9,7 @@ const firebaseConfig = {
     measurementId: "G-JN8E2LBWJF"
   };
 
-
+ 
 firebase.initializeApp(firebaseConfig)
 
 let DB = firebase.database().ref("Ecommerce")
