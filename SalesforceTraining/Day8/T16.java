@@ -16,9 +16,25 @@ public class T16 {
             System.out.println(numberOfCombinations(numberOfDice, total));
 
     }
-    static int numberOfCombinations(int numberOfDice , int total){
-      
-        return numberOfDice;
+    static int numberOfCombinations(int dice , int target){
+      if (target<0) {
+        return 0;
+      }
+      if (dice == 0 && target!=0) {
+        return 0;
+      }
+      if (dice!=0 && target==0) {
+        return 0;
+      }
+      if (dice==0 && target==0) {
+        return 1;
+      }
+      int ans = 0;
+      for(int i=1 ; i<=6 ; i++){
+        ans += numberOfCombinations(dice-1, target-i);
+        
+      }
+      return ans;
     }
 
 }
