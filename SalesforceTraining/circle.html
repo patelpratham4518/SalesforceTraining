@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle</title>
+    <style>
+
+.draggable{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    background-color: red;
+    float: left;
+   
+    
+} 
+.dropzone{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    background-color: blue; 
+    float: right;
+    justify-content: center;
+} 
+
+
+    </style>
+</head>
+<body>
+  
+
+    <!-- <span class="draggable" id="draggable-1" draggable="true" ondragstart="ondragstart(event)" ></span> -->
+    <span class="draggable" id="draggable-1" draggable="true"  ></span>
+    <span class="dropzone" id="dropzone" ondragover="onDrop(event)"></span>
+  
+
+
+    <!-- <script src="scripts.js"></script> -->
+    <script>
+      function onDragStart(event) {
+  event
+    .dataTransfer
+    .setData('text/plain', event.target.id);
+}
+
+
+// function onDragOver(event) {
+//   event.preventDefault();
+// }
+let counter = 1
+function onDrop(event) {
+  const id = event
+    .dataTransfer
+    .getData('text');
+    // const draggableElement = document.getElementById("draggable-1");
+    const draggableElement = document.getElementById("draggable-" + `${counter}`);
+    const drop = document.getElementById("dropzone");
+
+    // console.log(parseInt(draggableElement.style.height))
+    let height = parseInt(window.getComputedStyle(drop).height)
+    let width = parseInt(window.getComputedStyle(drop).width)
+
+    height -=20 *counter
+    width -= 20 *counter
+    // counter++
+    draggableElement.style.height = `${height}px`
+    draggableElement.style.width = `${width}px`
+
+    const dropzone = event.target;
+    dropzone.appendChild(draggableElement);
+
+    let newCircle = document.createElement("span")
+    newCircle.className = "draggable"
+    
+    newCircle.id = "draggable-" + "2"
+    newCircle.style.backgroundColor = "black"
+    newCircle.draggable = true
+    document.body.appendChild(newCircle)
+    
+    
+
+}
+    </script>
+</body>
+</html>

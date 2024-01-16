@@ -1,0 +1,25 @@
+
+ .circle1{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    background-color: red;
+    left: 100px;
+    top: 100px;
+    cursor: move;
+    position: absolute;
+    z-index: 10;
+} 
+.circle2{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    background-color: red;
+    background-color: blue;
+    top: 250px;
+    left: 1200px;
+    position: absolute;
+    z-index: 9;
+} 

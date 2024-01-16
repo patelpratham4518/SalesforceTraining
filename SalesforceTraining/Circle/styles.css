@@ -1,0 +1,24 @@
+.draggable{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    float: left;  
+} 
+.dropzone{
+    /* height: 200px;
+    width: 200px; */
+    border-radius: 50%;
+    display: block; 
+    float: right;
+    
+} 
+/* .none{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    float: right;
+    display: flex;
+    justify-content: center;
+} */
