@@ -11,10 +11,8 @@
             
     <apex:pageBlockButtons >
           <apex:commandButton action="{!Save}" value="Register"/>
-        
     </apex:pageBlockButtons>
-    
-            
         </apex:pageBlock>
+    
     </apex:form>
 </apex:page>

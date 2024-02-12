@@ -28,6 +28,7 @@ public class StudentLoginController {
                 nextPage.setRedirect(true);
             }
         } else {
+            // ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Student with this roll number does not exists.'));
             throw new MyException('Student with this roll number does not exists.');
             // nextPage = new Pagereference('https://mvclouds-c8-dev-ed--c.develop.vf.force.com/apex/StudentLoginPage?core.apexpages.request.devconsole=1');
         }

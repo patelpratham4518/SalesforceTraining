@@ -8,6 +8,7 @@
         <apex:pageBlockButtons >
           <apex:commandButton action="{!login}" value="Login"/>
     </apex:pageBlockButtons>
+    <!-- <apex:pageMessage id="Error" severity="Error"></apex:pageMessage>         -->
         
     </apex:pageBlock>
             </apex:form>
