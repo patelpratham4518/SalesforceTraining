@@ -3,6 +3,10 @@
     <apex:form>
         <apex:pageBlock>
             <apex:pageBlockSection title="AccountRelatedOpportunities">
+                
+                <!-- comment -->
+                <apex:inputField label="Choose Account" value="{!contact.AccountId}"/>
+
                 <apex:inputText value="{!AccountName}" label="Select Account"/>
                 <apex:commandButton value="See Related Opportunities" action="{!seeOpportunities}"/>
                 <apex:dataList var="opportunity" value="{!Opportunities}">
