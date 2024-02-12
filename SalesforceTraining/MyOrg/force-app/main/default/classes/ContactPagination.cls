@@ -11,14 +11,18 @@ public  class ContactPagination {
         return contacts;
     }
     public void previous(){
-        index -= blockSize;
+        if ((index - blockSize) >= 0) {
+            index -= blockSize;
+        }
     }
     public void next(){
-        index += blockSize;
+        if((index + blockSize) < totalRecords){
+            index += blockSize;
+        }
     }
     
     public void beginning(){
-        index += 0;
+        index = 0;
     }
     public void end(){
         index = totalRecords - math.mod(totalRecords,blockSize);

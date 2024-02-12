@@ -94,23 +94,7 @@
 
 
 
-// <apex:page controller="ContactPagination">
-//     <apex:pageBlock>
-//         <apex:form>
-//             <apex:pageBlockSection title="Contacts List">
-//                     <!-- <apex:dataList var="contact" value="{!contacts}">
-//                         {!contact.Name}
-//                     </apex:dataList> -->
-//             </apex:pageBlockSection>
-//             <apex:pageBlockButtons>
-//                 <apex:commandButton action="{!beginning}"><<</apex:commandButton>
-//                 <apex:commandButton action="{!previous}"><</apex:commandButton>
-//                 <apex:commandButton action="{!next}">></apex:commandButton>
-//                 <apex:commandButton action="{!end}">>></apex:commandButton>
-//             </apex:pageBlockButtons>
-//         </apex:form>
-//     </apex:pageBlock>
-// </apex:page>
+
 
 
 
