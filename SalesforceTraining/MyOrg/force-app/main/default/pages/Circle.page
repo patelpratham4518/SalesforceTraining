@@ -1,0 +1,82 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+ 
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>Circle</title>
+    
+    <style>
+        .draggable{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    float: left;  
+} 
+.dropzone{
+    border-radius: 50%;
+    display: block; 
+    float: right;
+    
+} 
+
+    </style>
+</head>
+<body>
+    <span class="draggable" id="circle-2" draggable="true"></span>
+    <span class="dropzone" id="circle-1"></span>
+    <script>
+        document.getElementById("circle-1").style.backgroundColor = "blue"
+document.getElementById("circle-1").style.height = "200px"
+document.getElementById("circle-1").style.width = "200px"
+document.getElementById("circle-2").style.backgroundColor = "red"
+
+
+let counter = 1
+document.addEventListener("dragenter", function(event) {
+    if ( event.target.className == "dropzone" ) {
+        let dropzoneid = "circle-" + counter.toString() 
+        
+        let draggableid = "circle-" + (counter+1).toString()
+        
+        let dropzone = document.getElementById(dropzoneid)
+        let draggable = document.getElementById(draggableid)
+        let height = parseInt(window.getComputedStyle(dropzone).height)
+        let width = parseInt(window.getComputedStyle(dropzone).width)
+    
+        height -=20
+        width -= 20 
+
+        console.log(counter)
+        console.log(draggableid)
+
+        draggable.style.height = `${height}px`
+        draggable.style.width = `${width}px`
+        
+
+        draggable.style.marginLeft = "10px"
+        draggable.style.marginTop = "10px"
+
+        
+        draggable.draggable = false
+        dropzone.appendChild(draggable)
+    console.log("dragenter")
+    let newCircle = document.createElement("span")
+    newCircle.className = "draggable"
+    newCircle.id = "circle-" + (counter+2).toString()
+    
+    newCircle.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16)
+    newCircle.draggable = true
+    document.body.appendChild(newCircle)
+    counter+=1
+   
+    }
+  });
+  
+    </script>
+</body>
+</html>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

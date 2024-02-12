@@ -1,0 +1,18 @@
+<apex:page standardController="Student__c" >
+    <apex:form >
+    
+    
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Students Information" columns="2" >
+            <apex:inputField value="{!Student__c.Name}"/>
+            <apex:inputField value="{!Student__c.Roll_No__c}"/>
+           <apex:inputField value="{!Student__c.Coursee__c}"/>
+        </apex:pageBlockSection>
+        
+      <apex:pageBlockButtons >
+          <apex:commandButton action="{!Save}" value="Save Record"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+        
+        </apex:form>
+</apex:page>

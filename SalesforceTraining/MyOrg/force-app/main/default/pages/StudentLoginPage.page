@@ -1,0 +1,14 @@
+<apex:page standardController="Student__c" extensions="StudentLoginController">
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Student Login Page" columns="1">
+            <apex:inputField value="{!Student__c.Roll_No__c}" required="true"/>
+            <apex:inputField value="{!Student__c.Password__c}" required="true" />
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons >
+          <apex:commandButton action="{!login}" value="Login"/>
+    </apex:pageBlockButtons>
+        
+    </apex:pageBlock>
+            </apex:form>
+</apex:page>
