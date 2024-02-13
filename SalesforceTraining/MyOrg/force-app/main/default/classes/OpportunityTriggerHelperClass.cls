@@ -10,4 +10,14 @@ public with sharing class OpportunityTriggerHelperClass {
         }
     }
 
+
+    public static void typeNewCustomer(List<Opportunity> opportunities){
+        for(Opportunity opportunity:opportunities){
+            opportunity.Type = 'New Customer';
+        }
+    }
+
+
+
+
 }
