@@ -92,24 +92,22 @@
 // }
 
 
+//Execute for making all Amounts zero of account and contact
+// List<Account> accounts = [select Total_Amount__c from Account];
+//     for(Account account:accounts){
+//         account.Total_Amount__c = 0 ;
+//     }
+// update accounts;
+    
+// List<Contact> contacts = [select Amount__c from Contact];
+//     for(Contact contact:contacts){
+//         contact.Amount__c = 0 ;
+//     }
+// update contacts;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// List<Account> accounts = [select Max_Amount_For_Contact__c from Account where Max_Amount_For_Contact__c = null ];
+//     for(Account account:accounts){
+//         account.Max_Amount_For_Contact__c = 0 ;
+//     }
+// update accounts;
 
