@@ -45,7 +45,7 @@ global class addFileToOpportunity {
 
        
     }
-    @future
+    @Future(callout=true)
     public static void futureAttach(String imageURL , String resImageUrl , String oppId) {
         System.debug('Inside Future');
         System.debug('Img below');

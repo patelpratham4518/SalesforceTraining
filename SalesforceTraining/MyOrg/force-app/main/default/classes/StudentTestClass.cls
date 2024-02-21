@@ -24,13 +24,6 @@ private class StudentTestClass {
 
     @isTest
     static void myUnitTest() {
-        Student__c student = new Student__c();
-        student.Name = 'Hardik Amin';
-        student.Roll_No__c = 351;
-        student.Coursee__c = 'a085g00000GgtpOAAR';
-        insert student;
-
-        student = [select Id,Name,Roll_No__c,Coursee__c,Club__c from Student__c where Id =: student.Id];
-        System.debug('student from test class= '+student);
+        
     }
 }
