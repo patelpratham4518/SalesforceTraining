@@ -39,8 +39,7 @@ global class addFileToOpportunity {
         
         Attachment attach = new Attachment(parentId = oppId, Name = 'ImgAttachment');
         attach.Body = resImage.getBodyAsBlob();    
-
-        // attach.ContentType = 'image/jpeg';
+        attach.ContentType = 'image/jpeg';
  
         insert attach;
         System.debug('Image attatched'); 
