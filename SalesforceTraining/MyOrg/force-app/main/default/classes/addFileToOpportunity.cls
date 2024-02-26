@@ -72,7 +72,7 @@ global class addFileToOpportunity {
         HTTPResponse resImage = http.send(reqImage);
         
         Attachment attach = new Attachment(parentId = oppId, Name = 'ImgAttachment');
-        attach.Body = resImage.getBodyAsBlob();    
+        attach.Body = resImage.getBodyAsBlob();   
         attach.ContentType = 'image/jpeg';
  
         insert attach;

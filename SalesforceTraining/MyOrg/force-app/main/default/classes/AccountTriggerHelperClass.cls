@@ -52,7 +52,7 @@ public with sharing class AccountTriggerHelperClass {
         }
     }
 
-    public static void delteSameNameAccount(List<Account> Accounts){
+    public static void deleteSameNameAccount(List<Account> Accounts){
         for(Account account:Accounts){
             List<Account> sameNameAccounts = [select Id,Name from Account where Name=:account.Name ];
             if(sameNameAccounts.size()>0){
@@ -61,21 +61,21 @@ public with sharing class AccountTriggerHelperClass {
         }
     }
 
-    public static void shareRecordWithWilson(List<Account> Accounts){
-        for(Account account:Accounts){
-            if (account.Rating == 'Hot') {
+    // public static void shareRecordWithWilson(List<Account> Accounts){
+    //     for(Account account:Accounts){
+    //         if (account.Rating == 'Hot') {
                 
-                AccountShare shareAccount = new AccountShare();
-                shareAccount.AccountId = account.Id;
-                shareAccount.UserOrGroupId = '0055g00000K4pfZAAR';
-                shareAccount.AccountAccessLevel = 'Edit';
-                shareAccount.OpportunityAccessLevel = 'Edit';
-                shareAccount.RowCause = Schema.AccountShare.RowCause.Manual; // reason
-                insert shareAccount;
-                System.debug('Record Shared with Wilson');
-            }
-        }
-    }
+    //             AccountShare shareAccount = new AccountShare();
+    //             shareAccount.AccountId = account.Id;
+    //             shareAccount.UserOrGroupId = '0055g00000K4pfZAAR';
+    //             shareAccount.AccountAccessLevel = 'Edit';
+    //             shareAccount.OpportunityAccessLevel = 'Edit';
+    //             shareAccount.RowCause = Schema.AccountShare.RowCause.Manual; // reason
+    //             insert shareAccount;
+    //             System.debug('Record Shared with Wilson');
+    //         }
+    //     }
+    // }
 
     public static void submitForApproval(List<Account> Accounts){
         for (Account account : Accounts) {
@@ -101,5 +101,5 @@ public with sharing class AccountTriggerHelperClass {
         }
     }
 
-
+    
 }

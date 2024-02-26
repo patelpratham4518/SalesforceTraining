@@ -1,19 +1,12 @@
 public with sharing class playGround {
+    static Integer x = 5;
+    public  Integer y = 10;
+
     public playGround() {
         
     }
     public static void test(){
-        try {
-            Integer n;
-            Integer mul = n*5;
-            System.debug(mul);
-        } catch (Exception e) {
-            
-            Error_Log newError = new Error_Log(e);
-
-        }finally{
-            System.debug('Inside debug');
-        }
-        
+        System.debug('x = '+x);
+           
     }
 }

@@ -3,7 +3,7 @@ public class ScheduleCreateOpp implements Schedulable{
 
     }
     public void execute(SchedulableContext sc){
-        List<Opportunity> opportunities;
+        List<Opportunity> opportunities  = new List<Opportunity>();
         for (Integer i = 0; i < 10; i++) {
             Opportunity opportunity = new Opportunity();
             opportunity.Name = 'Opportunity'+i;

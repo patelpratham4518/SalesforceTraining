@@ -73,33 +73,36 @@ public with sharing class ContactTriggerHelperClass {
                 Account relatedAccount  = [select Id,Max_Amount_For_Contact__c from Account where Id =: contact.AccountId];
 
                
-                if (relatedAccount.Max_Amount_For_Contact__c == 0) {
-                    contact.Amount__c.addError('Your parent account has zero amount Limit');
-                }
-                else {
+
                     if (contact.Amount__c > relatedAccount.Max_Amount_For_Contact__c) {
-                        System.debug('Divide Contacts');
-                        Decimal remainingAmount = contact.Amount__c;
-                        contact.Amount__c = relatedAccount.Max_Amount_For_Contact__c;
-                        remainingAmount -= relatedAccount.Max_Amount_For_Contact__c;
-                        Contact newContact = contact.clone(false);
-                        newContact.Amount__c =  remainingAmount;
 
-                        String lastName = contact.LastName;
+                        if (relatedAccount.Max_Amount_For_Contact__c == 0) {
+                                contact.Amount__c.addError('Your parent account has zero amount Limit');
+                            }
+                        else {
 
-                        String copyCount = lastName.right(1);
-                        try {
-                            Integer copyCountNew = Integer.valueOf(copyCount);
-                            copyCountNew += 1;
-                            lastName = lastName.removeEnd(copyCount);
-                            lastName += copyCountNew;
-                        } catch (Exception e) {
-                            lastName += 2;
-                        } 
-                        newContact.LastName = lastName;
-                        insert newContact;
+                            System.debug('Divide Contacts');
+                            Decimal remainingAmount = contact.Amount__c;
+                            contact.Amount__c = relatedAccount.Max_Amount_For_Contact__c;
+                            remainingAmount -= relatedAccount.Max_Amount_For_Contact__c;
+                            Contact newContact = contact.clone(false);
+                            newContact.Amount__c =  remainingAmount;
+
+                            String lastName = contact.LastName;
+
+                            String copyCount = lastName.right(1);
+                            try {
+                                Integer copyCountNew = Integer.valueOf(copyCount);
+                                copyCountNew += 1;
+                                lastName = lastName.removeEnd(copyCount);
+                                lastName += copyCountNew;
+                            } catch (Exception e) {
+                                lastName += 2;
+                            } 
+                            newContact.LastName = lastName;
+                            insert newContact;
+                        }
                     }
-                }
 
                 
             }

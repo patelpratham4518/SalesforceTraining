@@ -20,5 +20,6 @@ trigger ContactTrigger on Contact (after delete , after insert ,before insert, a
         ContactTriggerHelperClass.checkMaxAmount(Trigger.new);
     }
 
+
     
 }
