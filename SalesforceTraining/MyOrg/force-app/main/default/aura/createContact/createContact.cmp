@@ -18,7 +18,9 @@
 
          
 <lightning:card title="CUSTOM LOOKUP">
-    <div class="slds-form-element">
+
+
+    <!-- <div class="slds-form-element">
         <label class="slds-form-element__label" for="search">Search</label>
         <div class="slds-form-element__control">
             <div class="slds-input-has-icon slds-input-has-icon_right">
@@ -28,7 +30,19 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
+
+    
+        <label  for="search">Search Account</label>
+        <lightning:input type="text" id="search"  value="{!v.searchString}" placeholder="Search..." oninput="{!c.search}"  onchange="{!c.search}" onclick="{!c.search}"   default="" size="75" />
+        <button class="slds-button " onclick="{!c.clearSearch}" title="Clear Search">
+            <lightning:icon iconName="utility:clear" size="x-small" />
+        </button>
+        
+    
+  
+
+    
 
     <aura:if isTrue="{!v.accList.length >= 0}">
         <lightning:card title="Related Records">
