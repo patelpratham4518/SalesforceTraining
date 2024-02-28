@@ -5,20 +5,56 @@
                             force:lightningQuickAction" access="global" controller="createContactAura"> 
     <h1>Create Contact Form</h1>
 
-    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
-    <!-- <aura:attribute name="accList" type="Account[]"/>
+    <aura:attribute name="accList" type="Account[]"/>
     <aura:attribute name="searchString" type="String"/>
-    <aura:attribute name="AccountId" type="Id"/> -->
+    <aura:attribute name="AccountId" type="Id"/>
 
     <aura:attribute name="FirstName" type="String"/>
     <aura:attribute name="LastName" type="String"/>
     <aura:attribute name="Mobile" type="Integer"/>
     <aura:attribute name="Email" type="String"/>
+
+         
+<lightning:card title="CUSTOM LOOKUP">
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="search">Search</label>
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon_right">
+                <lightning:input type="text" id="search" class="slds-input" value="{!v.searchString}" placeholder="Search..." oninput="{!c.search}"  onchange="{!c.search}" onclick="{!c.search}"   default="" size="75" />
+                <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" onclick="{!c.clearSearch}" title="Clear Search">
+                    <lightning:icon iconName="utility:clear" size="x-small" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <aura:if isTrue="{!v.accList.length >= 0}">
+        <lightning:card title="Related Records">
+            <ul>
+                <aura:iteration items="{!v.accList}" var="record">
+                    <lightning:layout class="slds-m-top--small">
+                        <lightning:layoutItem size="2">
+                    <lightning:icon iconName="standard:account"/>
+                </lightning:layoutItem>
+                        <lightning:layoutItem size="10">
+                        <a onclick="{!c.selectRecord}" data-record="{!record.Id}">
+                            <strong class="custom-class">{!record.Name}</strong>
+                        </a>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                </aura:iteration>
+            </ul>
+        </lightning:card>
+    </aura:if>
+</lightning:card> 
+
+
     
 
 
-
+    
     <lightning:input type="text" value="{!v.FirstName}" placeholder="Enter your First Name" label="First Name"/>
     <lightning:input type="text" value="{!v.LastName}" placeholder="Enter your Last Name" label="Last Name"/>
     <lightning:input type="Number" value="{!v.Mobile}" placeholder="Enter your Mobile Number" label="Mobile Number"/>
