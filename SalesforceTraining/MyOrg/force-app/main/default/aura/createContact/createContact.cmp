@@ -1,0 +1,33 @@
+<aura:component implements="force:appHostable,
+                            flexipage:availableForAllPageTypes,
+                            force:hasRecordId,
+                            forceCommunity:availableForAllPageTypes,
+                            force:lightningQuickAction" access="global" controller="createContactAura"> 
+    <h1>Create Contact Form</h1>
+
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+
+    <!-- <aura:attribute name="accList" type="Account[]"/>
+    <aura:attribute name="searchString" type="String"/>
+    <aura:attribute name="AccountId" type="Id"/> -->
+
+    <aura:attribute name="FirstName" type="String"/>
+    <aura:attribute name="LastName" type="String"/>
+    <aura:attribute name="Mobile" type="Integer"/>
+    <aura:attribute name="Email" type="String"/>
+    
+
+
+
+    <lightning:input type="text" value="{!v.FirstName}" placeholder="Enter your First Name" label="First Name"/>
+    <lightning:input type="text" value="{!v.LastName}" placeholder="Enter your Last Name" label="Last Name"/>
+    <lightning:input type="Number" value="{!v.Mobile}" placeholder="Enter your Mobile Number" label="Mobile Number"/>
+    <lightning:input type="Email" value="{!v.Email}" placeholder="Enter your Email" label="Email"/>
+    
+    
+    
+    <lightning:button label="Create Contact" onclick="{!c.createContact}" variant="success"/>
+    <!-- <lightning:button label="Success"
+    variant="success"
+    onclick="{!c.showSuccess}"/> -->
+</aura:component>	

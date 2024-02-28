@@ -8,6 +8,7 @@ global class accountDateTime implements Database.Batchable<sObject> , Schedulabl
 
     global void execute (Database.BatchableContext bc, List<Account> Accounts){
         for (Account account : Accounts) {
+            // account.Description = DateTime.now().toString();
             account.Description = DateTime.now().toString();
         }
         update Accounts;
