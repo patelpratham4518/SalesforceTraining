@@ -27,7 +27,7 @@
     
     
     <lightning:button label="Create Contact" onclick="{!c.createContact}" variant="success"/>
-    <!-- <lightning:button label="Success"
+    <lightning:button label="Success"
     variant="success"
-    onclick="{!c.showSuccess}"/> -->
+    onclick="{!c.showSuccess}"/>
 </aura:component>	

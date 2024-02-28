@@ -16,7 +16,7 @@
         var Mobile = component.get("v.Mobile");
         var Email = component.get("v.Email");
     
-        console.log("Inside createContactjscontroller");
+        
         var action = component.get("c.createContactApex");
         action.setParams({FirstName:FirstName , LastName:LastName , Mobile:Mobile, Email:Email});
         action.setCallback(this, function(response){
@@ -27,18 +27,21 @@
         });
         $A.enqueueAction(action);
     },
-    // showSuccess : function(component, event, helper) {
-    //     var toastEvent = $A.get("e.force:showToast");
-    //     toastEvent.setParams({
-    //         title : 'Success',
-    //         message: 'This is a success message',
-    //         duration:' 5000',
-    //         key: 'info_alt',
-    //         type: 'success',
-    //         mode: 'pester'
-    //     });
-    //     toastEvent.fire();
-    // },
+    showSuccess : function(component, event, helper) {
+        console.log("success called");
+        var toastEvent = $A.get("e.force:showToast");
+        console.log("action =  "+toastEvent);
+        toastEvent.setParams({
+            title : 'Success',
+            message: 'This is a success message',
+            duration:' 5000',
+            key: 'info_alt',
+            type: 'success',
+            mode: 'pester'
+            
+        });
+        toastEvent.fire();
+    },
 
     // search : function (component , event , helper) {
         
