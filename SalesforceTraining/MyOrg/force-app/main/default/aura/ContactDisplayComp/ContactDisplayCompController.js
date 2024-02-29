@@ -141,18 +141,16 @@
             var start = component.get("v.start");
             var end = component.get("v.end");
             var totalSize = component.get("v.totalSize");
-    
-            console.log("start = " + start);
-            console.log("end = " + end);
-            console.log("totalSize = " + totalSize);
-            console.log("relatedContactList = " + relatedContactList.length);
-    
-    
+            var pageSize = component.get("v.pageSize");
+            var pageCount = Math.floor(start/pageSize)+1;
+
             var paginationList = [];
             for (let index = start; index <= end; index++) {
                 paginationList.push(relatedContactList[index]);
             }
             component.set("v.paginationList",paginationList);
+            component.set("v.pageCount",pageCount);
+            
         }
 
     }

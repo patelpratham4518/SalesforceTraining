@@ -41,9 +41,10 @@ force:lightningQuickAction" access="global">
 <aura:attribute name="totalSize" type="Integer"/>
 <aura:attribute name="start" type="Integer"/>
 <aura:attribute name="end" type="Integer"/>
-<aura:attribute name="pageCount" type="Integer" default="1"/>
+<aura:attribute name="pageCount" type="Integer" default="10"/>
 
 <aura:if isTrue="{!v.paginationList.length > 0}">
+    
 <table class="slds-table slds-table-bordered">
     <thead>
         <tr style="background-color:#6cbcd2;color:white;font-weight:bold">
@@ -65,10 +66,10 @@ force:lightningQuickAction" access="global">
         <lightning:button label="Previous" onclick="{!c.previous}"/>
         <lightning:button label="Next" onclick="{!c.next}"/>
         <lightning:button label="Last" onclick="{!c.last}"/>
-        
-        
     </tbody>
 </table>
+<h1>Page Count : {!v.pageCount}</h1>
+
 </aura:if>
 
 </aura:component>	
