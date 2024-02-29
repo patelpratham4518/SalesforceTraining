@@ -84,6 +84,7 @@
         var totalSize = component.get("v.totalSize");
         var start = component.get("v.start");
         var end = component.get("v.end");
+       
 
         start-=pageSize;
         end -= pageSize;
@@ -105,7 +106,7 @@
 
         start+=pageSize;
         end += pageSize;
-        if (end<=totalSize) {     
+        if (start<=(totalSize-1)) {     
             component.set("v.start",start);
             component.set("v.end",end);
             var action = component.get("c.setPaginationlist");
@@ -116,9 +117,11 @@
     last : function (component, event , helper) {
         var totalSize = component.get("v.totalSize");
         var pageSize = component.get("v.pageSize");
-        
-        component.set("v.start",totalSize-pageSize);
-        component.set("v.end",totalSize);
+        var start = totalSize - (totalSize%pageSize);
+        var end = start + pageSize-1;
+        component.set("v.start",start);
+        component.set("v.end",end);
+        console.log("JSK");
         var action = component.get("c.setPaginationlist");
         $A.enqueueAction(action);
     },
@@ -127,6 +130,10 @@
         var relatedContactList = component.get("v.relatedContactList");
         if (relatedContactList == null) {
             component.set("v.paginationList",[]);
+            component.set("v.totalSize",0);
+            component.set("v.start",0);
+            component.set("v.end",0);
+            
         }
         else
         {

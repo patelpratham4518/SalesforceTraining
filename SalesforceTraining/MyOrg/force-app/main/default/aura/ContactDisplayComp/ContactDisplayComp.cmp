@@ -60,7 +60,7 @@ force:lightningQuickAction" access="global">
 <aura:attribute name="totalSize" type="Integer"/>
 <aura:attribute name="start" type="Integer"/>
 <aura:attribute name="end" type="Integer"/>
-
+<aura:attribute name="pageCount" type="Integer" default="1"/>
 
 <aura:if isTrue="{!v.paginationList.length > 0}">
 <table class="slds-table slds-table-bordered">
@@ -79,10 +79,13 @@ force:lightningQuickAction" access="global">
                 <td><ui:outputEmail value="{!record.Email}"/></td>
             </tr>
         </aura:iteration>
+        
         <lightning:button label="First" onclick="{!c.first}"/>
         <lightning:button label="Previous" onclick="{!c.previous}"/>
         <lightning:button label="Next" onclick="{!c.next}"/>
         <lightning:button label="Last" onclick="{!c.last}"/>
+        
+        
     </tbody>
 </table>
 </aura:if>
