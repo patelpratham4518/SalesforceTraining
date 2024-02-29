@@ -34,25 +34,6 @@ force:lightningQuickAction" access="global">
 </aura:if>
 
 
-<aura:if isTrue="{!v.relatedContactList.length >= 0}">
-    <lightning:card title="Related Contacts...">
-        <ul>
-            <aura:iteration items="{!v.relatedContactList}" var="record">
-                <lightning:layout class="slds-m-top--small">
-                    <lightning:layoutItem size="3">
-                        <strong class="custom-class"> Name : {!record.Name}</strong>
-                    </lightning:layoutItem>
-                    <lightning:layoutItem size="3">
-                        <strong class="custom-class">Mobile : {!record.MobilePhone}</strong>
-                    </lightning:layoutItem>
-                    <lightning:layoutItem size="3">
-                        <strong class="custom-class">Email : {!record.Email}</strong>
-                    </lightning:layoutItem>
-                </lightning:layout>
-            </aura:iteration>
-        </ul>
-    </lightning:card>
-</aura:if>
 
 
 <aura:attribute name="paginationList" type="Contact[]"/>
