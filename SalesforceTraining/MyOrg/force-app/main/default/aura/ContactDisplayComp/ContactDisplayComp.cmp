@@ -1,0 +1,60 @@
+<aura:component controller="CotactDisplayComp" implements="force:appHostable,
+flexipage:availableForAllPageTypes,
+force:hasRecordId,
+forceCommunity:availableForAllPageTypes,
+force:lightningQuickAction" access="global">
+
+<aura:attribute name="searchString" type="String"/>
+<aura:attribute name="conList" type="Contact[]"/>
+<aura:attribute name="contactId" type="Id"/>
+<aura:attribute name="relatedContactList" type="Contact[]"/>
+
+<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+<label for="search">Search Contact</label>
+<lightning:input type="text" id="search" value="{!v.searchString}" placeholder="Search..." oninput="{!c.search}" onchange="{!c.search}" onclick="{!c.search}" default=""/>
+
+<aura:if isTrue="{!v.conList.length >= 0}">
+    <lightning:card>
+        <ul>
+            <aura:iteration items="{!v.conList}" var="record">
+                <lightning:layout class="slds-m-top--small">
+                    <lightning:layoutItem size="2">
+                <lightning:icon iconName="standard:contact"/>
+            </lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                    <a onclick="{!c.selectRecord}" data-record="{!record.Id}">
+                        <strong class="custom-class">{!record.Name}</strong>
+                    </a>
+                </lightning:layoutItem>
+            </lightning:layout>
+            </aura:iteration>
+        </ul>
+    </lightning:card>
+</aura:if>
+
+
+<aura:if isTrue="{!v.relatedContactList.length >= 0}">
+    <lightning:card title="Related Contacts...">
+        <ul>
+            <aura:iteration items="{!v.relatedContactList}" var="record">
+                <lightning:layout class="slds-m-top--small">
+                    <lightning:layoutItem size="3">
+                        <strong class="custom-class"> Name : {!record.Name}</strong>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3">
+                        <strong class="custom-class">Mobile : {!record.MobilePhone}</strong>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3">
+                        <strong class="custom-class">Email : {!record.Email}</strong>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </aura:iteration>
+        </ul>
+    </lightning:card>
+</aura:if>
+
+</aura:component>	
+
+
+

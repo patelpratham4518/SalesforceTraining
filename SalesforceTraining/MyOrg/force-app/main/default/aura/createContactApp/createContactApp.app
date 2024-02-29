@@ -1,4 +1,4 @@
 <aura:application extends="force:slds">
-<c:createContact/>
+<c:ContactDisplayComp/>
 </aura:application>	
   
