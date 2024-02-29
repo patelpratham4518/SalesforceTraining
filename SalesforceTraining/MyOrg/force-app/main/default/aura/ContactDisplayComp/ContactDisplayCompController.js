@@ -37,15 +37,18 @@
             return record.Id === selectedRecordId;
         });
         component.set("v.searchString",selectedRecord.Name);
-        component.set("v.contactId",selectedRecordId);
+        component.set("v.accountId",selectedRecordId);
         component.set("v.conList",[]);
 
+        console.log("Selected = "+selectedRecord.Name);
         var action = component.get("c.getRelatedContacts");
-        action.setParams({accountId : selectedRecordId});
+        action.setParams({accountId : selectedRecord.AccountId});
+        console.log("AccountId = "+selectedRecord.AccountId);
         action.setCallback(this,function(response){
             var state = response.getState();
             if(state == "SUCCESS"){
                 component.set("v.relatedContactList",response.getReturnValue());
+                console.log("Response = "+response.getReturnValue());
             }
         });
         $A.enqueueAction(action);

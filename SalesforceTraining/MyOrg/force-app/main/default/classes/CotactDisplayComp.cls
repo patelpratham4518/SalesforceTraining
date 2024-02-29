@@ -11,8 +11,9 @@ public with sharing class CotactDisplayComp {
     }
 
     @AuraEnabled
-    public static List<Contact> getRelatedContacts(Id contactId){
-        Id accountId = [select AccountId from Contact where Id=:contactId].AccountId;
+    public static List<Contact> getRelatedContacts(Id accountId){
+        
+        
         if (accountId!=null) {
             return [select Id,Name,MobilePhone,Email from Contact where AccountId =:accountId];
         }
@@ -23,6 +24,6 @@ public with sharing class CotactDisplayComp {
 
     @AuraEnabled
     public static List<Contact> getAllContacts(){
-       return [select Id,Name,MobilePhone,Email from Contact limit 10];
+       return [select Id,Name,MobilePhone,Email from Contact ];
     }
 }
