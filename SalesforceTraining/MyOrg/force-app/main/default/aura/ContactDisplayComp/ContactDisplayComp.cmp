@@ -54,6 +54,39 @@ force:lightningQuickAction" access="global">
     </lightning:card>
 </aura:if>
 
+
+<aura:attribute name="paginationList" type="Contact[]"/>
+<aura:attribute name="pageSize" type="Integer" default="10"/>
+<aura:attribute name="totalSize" type="Integer"/>
+<aura:attribute name="start" type="Integer"/>
+<aura:attribute name="end" type="Integer"/>
+
+
+<aura:if isTrue="{!v.paginationList.length > 0}">
+<table class="slds-table slds-table-bordered">
+    <thead>
+        <tr style="background-color:#6cbcd2;color:white;font-weight:bold">
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <aura:iteration items="{!v.paginationList}" var="record">
+            <tr>
+                <td><ui:outputText value="{!record.Name}"/></td>
+                <td><ui:outputPhone value="{!record.MobilePhone}"/></td>
+                <td><ui:outputEmail value="{!record.Email}"/></td>
+            </tr>
+        </aura:iteration>
+        <lightning:button label="First" onclick="{!c.first}"/>
+        <lightning:button label="Previous" onclick="{!c.previous}"/>
+        <lightning:button label="Next" onclick="{!c.next}"/>
+        <lightning:button label="Last" onclick="{!c.last}"/>
+    </tbody>
+</table>
+</aura:if>
+
 </aura:component>	
 
 

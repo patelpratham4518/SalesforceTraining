@@ -5,7 +5,11 @@
             var state = response.getState();
             if (state == "SUCCESS") {
                 component.set("v.relatedContactList",response.getReturnValue());
-                
+                component.set("v.totalSize",component.get("v.relatedContactList").length);
+                component.set("v.start",0);
+                component.set("v.end",component.get("v.pageSize")-1);
+                var setPagination = component.get("c.setPaginationlist");
+                $A.enqueueAction(setPagination);
             }
         });
         $A.enqueueAction(action);
@@ -21,12 +25,14 @@
                 var state = response.getState();
                 if(state == "SUCCESS"){
                     component.set("v.conList",response.getReturnValue());
+                   
                 }
             });
             $A.enqueueAction(action);
         } else {
             component.set("v.conList",[]);
         }
+       
     },
     selectRecord : function(component , event , helper){
         var selectedRecordId = event.currentTarget.dataset.record;
@@ -49,9 +55,75 @@
             if(state == "SUCCESS"){
                 component.set("v.relatedContactList",response.getReturnValue());
                 console.log("Response = "+response.getReturnValue());
+                var setPagination = component.get("c.setPaginationlist");
+                $A.enqueueAction(setPagination);
             }
         });
         $A.enqueueAction(action);
 
+    },
+    first : function (component, event , helper) {
+        var pageSize = component.get("v.pageSize");
+
+        component.set("v.start",0);
+        component.set("v.end",pageSize-1);
+        var action = component.get("c.setPaginationlist");
+        $A.enqueueAction(action);
+    },
+    previous : function (component, event , helper) {
+        
+        var pageSize = component.get("v.pageSize");
+        var totalSize = component.get("v.totalSize");
+        var start = component.get("v.start");
+        var end = component.get("v.end");
+
+        start-=pageSize;
+        end -= pageSize;
+
+        if (start>=0) {
+            component.set("v.start",start);
+            component.set("v.end",end);
+            var action = component.get("c.setPaginationlist");
+            $A.enqueueAction(action);
+        }
+
+    },
+    next : function (component, event , helper) {
+        
+        var pageSize = component.get("v.pageSize");
+        var totalSize = component.get("v.totalSize");
+        var start = component.get("v.start");
+        var end = component.get("v.end");
+
+        start+=pageSize;
+        end += pageSize;
+        if (end<=totalSize) {     
+            component.set("v.start",start);
+            component.set("v.end",end);
+            var action = component.get("c.setPaginationlist");
+            $A.enqueueAction(action);
+        }
+      
+    },
+    last : function (component, event , helper) {
+        var totalSize = component.get("v.totalSize");
+        var pageSize = component.get("v.pageSize");
+        
+        component.set("v.start",totalSize-pageSize);
+        component.set("v.end",totalSize);
+        var action = component.get("c.setPaginationlist");
+        $A.enqueueAction(action);
+    },
+    setPaginationlist : function (component , event , helper){
+        console.log("Pagination called");
+        var relatedContactList = component.get("v.relatedContactList");
+        var start = component.get("v.start");
+        var end = component.get("v.end");
+     
+        var paginationList = [];
+        for (let index = start; index <= end; index++) {
+            paginationList.push(relatedContactList[index]);
+        }
+        component.set("v.paginationList",paginationList);
     }
 })
