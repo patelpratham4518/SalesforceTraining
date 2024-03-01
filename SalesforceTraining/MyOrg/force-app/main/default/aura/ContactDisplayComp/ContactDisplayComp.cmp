@@ -1,8 +1,4 @@
-<aura:component controller="CotactDisplayComp" implements="force:appHostable,
-flexipage:availableForAllPageTypes,
-force:hasRecordId,
-forceCommunity:availableForAllPageTypes,
-force:lightningQuickAction" access="global">
+<aura:component controller="CotactDisplayComp" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
 
 <aura:attribute name="searchString" type="String"/>
 <aura:attribute name="conList" type="Contact[]"/>
@@ -11,10 +7,10 @@ force:lightningQuickAction" access="global">
 
 <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
 
-<label for="search">Search Contact</label>
-<lightning:input type="text" id="search" value="{!v.searchString}" placeholder="Search..." oninput="{!c.search}" onchange="{!c.search}" onclick="{!c.search}" default=""/>
 
-<aura:if isTrue="{!v.conList.length >= 0}">
+<lightning:input type="text" id="search" value="{!v.searchString}" placeholder="Search Contact..." oninput="{!c.search}" onchange="{!c.search}" onclick="{!c.search}" default=""/>
+
+<aura:if isTrue="{!v.conList.length > 0}">
     <lightning:card>
         <ul>
             <aura:iteration items="{!v.conList}" var="record">
@@ -47,7 +43,8 @@ force:lightningQuickAction" access="global">
     
 <table class="slds-table slds-table-bordered">
     <thead>
-        <tr style="background-color:#6cbcd2;color:white;font-weight:bold">
+        <!-- <tr style="background-color:#6cbcd2;color:white;font-weight:bold"> -->
+        <tr>
             <th>Name</th>
             <th>Mobile</th>
             <th>Email</th>
@@ -61,18 +58,17 @@ force:lightningQuickAction" access="global">
                 <td><ui:outputEmail value="{!record.Email}"/></td>
             </tr>
         </aura:iteration>
-        
         <lightning:button label="First" onclick="{!c.first}"/>
         <lightning:button label="Previous" onclick="{!c.previous}"/>
+        <lightning:button label="{!v.pageCount}"/>
         <lightning:button label="Next" onclick="{!c.next}"/>
         <lightning:button label="Last" onclick="{!c.last}"/>
+        Showing {!v.start+1} to {!v.end+1} from {!v.totalSize}
+        
     </tbody>
 </table>
-<h1>Page Count : {!v.pageCount}</h1>
+
 
 </aura:if>
 
-</aura:component>	
-
-
-
+</aura:component>
