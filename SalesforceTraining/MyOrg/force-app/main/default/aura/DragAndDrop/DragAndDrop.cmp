@@ -1,0 +1,12 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="DragAndDrop">
+
+    <div class="section1">
+        <c:childDragAndDrop/>
+    </div>
+   
+    <div class="section2">
+        <c:childDragAndDrop/>
+
+    </div>
+
+</aura:component>	

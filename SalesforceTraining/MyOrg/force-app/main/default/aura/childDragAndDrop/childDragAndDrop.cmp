@@ -1,0 +1,56 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="DragAndDrop">
+
+<aura:attribute name="searchString" type="String"/>
+<aura:attribute name="accList" type="Account[]"/>
+<aura:attribute name="accountId" type="Id"/>
+<aura:attribute name="relatedContactList" type="Contact[]"/>
+<aura:attribute name="total" type="Integer" />
+
+<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+
+<lightning:input type="text" id="search" value="{!v.searchString}" placeholder="Search Account..." oninput="{!c.search}" onchange="{!c.search}" onclick="{!c.search}" default=""/>
+
+<aura:if isTrue="{!v.accList.length > 0}">
+    <lightning:card>
+        <ul>
+            <aura:iteration items="{!v.accList}" var="record">
+                <lightning:layout class="slds-m-top--small">
+                    <lightning:layoutItem size="2">
+                        <lightning:icon iconName="standard:account"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <a onclick="{!c.selectRecord}" data-record="{!record.Id}">
+                            <strong class="custom-class">{!record.Name}</strong>
+                        </a>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </aura:iteration>
+        </ul>
+    </lightning:card>
+</aura:if>
+
+<aura:if isTrue="{!v.relatedContactList.length > 0}">
+    <table class="slds-table slds-table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.relatedContactList}" var="record">
+                <tr>
+                    <td><ui:outputText value="{!record.Name}"/></td>
+                    <td><ui:outputPhone value="{!record.MobilePhone}"/></td>
+                    <td><ui:outputEmail value="{!record.Email}"/></td>
+                </tr>
+            </aura:iteration>
+            Total : {!v.total}
+        </tbody>
+    </table>
+</aura:if>
+
+
+</aura:component>	
