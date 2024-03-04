@@ -34,7 +34,7 @@
                 let state = response.getState();
                 if(state == "SUCCESS"){
                     console.log("hurrey!!!");
-                    
+                    alert("Contact's Account Changed!!!")
                 }
             })
             $A.enqueueAction(action)

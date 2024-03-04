@@ -90,6 +90,9 @@
         console.log(`selected Contact = ${component.get("v.contactIdChange")}`);
     },
     
+    refresh : function(component,event,helper){
+        console.log("Refresh called");
+    }
 
 })
 
