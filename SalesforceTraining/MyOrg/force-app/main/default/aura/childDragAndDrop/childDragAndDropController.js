@@ -51,6 +51,9 @@
                 else {
                     component.set("v.accountIdSection2",selectedRecordId)
                 }
+
+                let setTotal = component.get("c.getTotal")
+                $A.enqueueAction(setTotal)
                 
             }
             else{
@@ -58,6 +61,22 @@
             }
         });
         $A.enqueueAction(action);
+    },
+
+    getTotal: function(component ,event , helper){
+        console.log("getTotal Called");
+        let accountId = component.get("v.accountId")
+        let action = component.get("c.getTotalCount")
+        action.setParams({
+            accountId : accountId
+        })
+        action.setCallback(this,function(response){
+            let state = response.getState();
+            if(state == "SUCCESS"){
+                component.set("v.totalAggrigate",response.getReturnValue())
+            }
+        })
+        $A.enqueueAction(action)
     },
 
     ondragstart : function(component , event, helper) {
@@ -68,7 +87,7 @@
         // console.log("section = ",section);
         component.set("v.currentSection",section)
             
-
+        console.log(`selected Contact = ${component.get("v.contactIdChange")}`);
     },
     
 

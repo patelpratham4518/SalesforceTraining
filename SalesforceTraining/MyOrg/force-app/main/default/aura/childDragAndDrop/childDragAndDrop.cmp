@@ -6,7 +6,7 @@
 <aura:attribute name="accountIdSection1" type="Id"/>
 <aura:attribute name="accountIdSection2" type="Id"/>
 
-
+<aura:attribute name="totalAggrigate" type="Integer"/>
 
 
 <aura:attribute name="searchString" type="String"/>
@@ -50,7 +50,7 @@
         </thead>
         <tbody>
             <aura:iteration items="{!v.relatedContactList}" var="record">
-                <!-- <tr draggable="true" id="{!record.Id}" ondragstart="{!c.ondragstart}"> -->
+                
                 <tr>
                     <td draggable="true" id="{!record.Id}" ondragstart="{!c.ondragstart}"><ui:outputText value="{!record.Name}"/></td>
                     <td><ui:outputPhone value="{!record.MobilePhone}"/></td>
@@ -58,9 +58,12 @@
                 </tr>
             </aura:iteration>
             Total : {!v.total}
+            <br/>
+            Total Contcts : {!v.totalAggrigate}
         </tbody>
     </table>
 </aura:if>
+
 
 
 </aura:component>	
