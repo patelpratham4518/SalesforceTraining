@@ -5,15 +5,15 @@
     <aura:attribute name="accountIdSection2" type="Id"/>
     <aura:attribute name="currentSection"  type="String"/>
     
-
+    
 
     <div class="section1" id="section1" ondragover="{!c.ondragover}" ondrop="{!c.ondrop}">
-        <c:childDragAndDrop section="section1" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}"/>
+        <c:childDragAndDrop section="section1" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}" aura:id="child1"/>
 
     </div>
    
     <div class="section2" id="section2" ondragover="{!c.ondragover}" ondrop="{!c.ondrop}">
-        <c:childDragAndDrop section="section2" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}"/>
+        <c:childDragAndDrop section="section2" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}" aura:id="child2"/>
     </div>
 
 

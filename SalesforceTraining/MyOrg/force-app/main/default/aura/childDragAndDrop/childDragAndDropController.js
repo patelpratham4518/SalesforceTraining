@@ -92,6 +92,34 @@
     
     refresh : function(component,event,helper){
         console.log("Refresh called");
+        let accountId = component.get("v.accountId")
+        let action = component.get("c.getRelatedContacts");
+        action.setParams({accountId : accountId});
+        action.setCallback(this,function(response){
+            let state = response.getState();
+            if(state == "SUCCESS"){
+                component.set("v.relatedContactList",response.getReturnValue());
+                component.set("v.total",response.getReturnValue().length);
+                // console.log("Response = "+response.getReturnValue());
+
+                let section = component.get("v.section")
+                if (section == "section1") {
+                    component.set("v.accountIdSection1",accountId)
+                }
+                else {
+                    component.set("v.accountIdSection2",accountId)
+                }
+
+                let setTotal = component.get("c.getTotal")
+                $A.enqueueAction(setTotal)
+                
+            }
+            else{
+                
+            }
+        });
+        $A.enqueueAction(action);
+
     }
 
 })

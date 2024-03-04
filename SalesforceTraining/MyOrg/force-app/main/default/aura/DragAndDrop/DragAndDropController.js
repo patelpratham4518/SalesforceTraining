@@ -35,6 +35,11 @@
                 if(state == "SUCCESS"){
                     console.log("hurrey!!!");
                     alert("Contact's Account Changed!!!")
+
+                    let child1 = component.find("child1")
+                    let child2 = component.find("child2")
+                    child1.refresh(component,event,helper)
+                    child2.refresh(component,event,helper)
                 }
             })
             $A.enqueueAction(action)
