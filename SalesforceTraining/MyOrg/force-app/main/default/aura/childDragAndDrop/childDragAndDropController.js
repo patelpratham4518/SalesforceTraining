@@ -42,13 +42,35 @@
             if(state == "SUCCESS"){
                 component.set("v.relatedContactList",response.getReturnValue());
                 component.set("v.total",response.getReturnValue().length);
-                console.log("Response = "+response.getReturnValue());
+                // console.log("Response = "+response.getReturnValue());
+
+                let section = component.get("v.section")
+                if (section == "section1") {
+                    component.set("v.accountIdSection1",selectedRecordId)
+                }
+                else {
+                    component.set("v.accountIdSection2",selectedRecordId)
+                }
+                
             }
             else{
                 
             }
         });
         $A.enqueueAction(action);
+    },
 
-    }
+    ondragstart : function(component , event, helper) {
+        // console.log(event.target.id)
+        let contactId = event.target.id
+        component.set("v.contactIdChange",contactId)
+        let section = component.get("v.section")
+        // console.log("section = ",section);
+        component.set("v.currentSection",section)
+            
+
+    },
+    
+
 })
+

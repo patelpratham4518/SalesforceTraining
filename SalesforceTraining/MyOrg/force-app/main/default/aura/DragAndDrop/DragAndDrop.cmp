@@ -1,12 +1,22 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="DragAndDrop">
 
-    <div class="section1">
-        <c:childDragAndDrop/>
+    <aura:attribute name="contactIdChange" type="Id" /> 
+    <aura:attribute name="accountIdSection1" type="Id"/>
+    <aura:attribute name="accountIdSection2" type="Id"/>
+    <aura:attribute name="currentSection"  type="String"/>
+    
+
+    
+    
+    <div class="section1" id="section1">
+        <c:childDragAndDrop section="section1" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}"/>
+        {!v.accountIdSection1}
     </div>
    
-    <div class="section2">
-        <c:childDragAndDrop/>
-
+    <div class="section2" id="section2" ondragover="{!c.ondrop}">
+        <c:childDragAndDrop section="section2" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}"/>
+        {!v.accountIdSection2}
     </div>
+
 
 </aura:component>	

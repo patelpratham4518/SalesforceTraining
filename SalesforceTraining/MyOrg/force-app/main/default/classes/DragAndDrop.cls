@@ -12,4 +12,12 @@ public with sharing class DragAndDrop {
     public static List<Contact> getRelatedContacts(Id accountId){
             return [select Id,Name,MobilePhone,Email from Contact where AccountId =:accountId];
     }
+    @AuraEnabled
+    public static void changeAccount(Id contactId , Id accountId){
+            System.debug('ContactId = '+contactId + 'AccountId' + accountId);
+            Contact contact = [select Id,AccountId from Contact where Id = :contactId];
+            contact.AccountId = accountId;
+            update contact;
+    }
+
 }

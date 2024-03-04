@@ -1,5 +1,14 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="DragAndDrop">
 
+<aura:attribute name="section"  type="String"/>
+<aura:attribute name="currentSection"  type="String"/>
+<aura:attribute name="contactIdChange" type="Id"/>
+<aura:attribute name="accountIdSection1" type="Id"/>
+<aura:attribute name="accountIdSection2" type="Id"/>
+
+
+
+
 <aura:attribute name="searchString" type="String"/>
 <aura:attribute name="accList" type="Account[]"/>
 <aura:attribute name="accountId" type="Id"/>
@@ -41,8 +50,9 @@
         </thead>
         <tbody>
             <aura:iteration items="{!v.relatedContactList}" var="record">
+                <!-- <tr draggable="true" id="{!record.Id}" ondragstart="{!c.ondragstart}"> -->
                 <tr>
-                    <td><ui:outputText value="{!record.Name}"/></td>
+                    <td draggable="true" id="{!record.Id}" ondragstart="{!c.ondragstart}"><ui:outputText value="{!record.Name}"/></td>
                     <td><ui:outputPhone value="{!record.MobilePhone}"/></td>
                     <td><ui:outputEmail value="{!record.Email}"/></td>
                 </tr>
