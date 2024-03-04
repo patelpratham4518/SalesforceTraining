@@ -7,12 +7,12 @@
     
 
 
-    <div class="section1" id="section1" ondragover="{!c.ondrop}">
+    <div class="section1" id="section1" ondragover="{!c.ondragover}" ondrop="{!c.ondrop}">
         <c:childDragAndDrop section="section1" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}"/>
 
     </div>
    
-    <div class="section2" id="section2" ondragover="{!c.ondrop}">
+    <div class="section2" id="section2" ondragover="{!c.ondragover}" ondrop="{!c.ondrop}">
         <c:childDragAndDrop section="section2" contactIdChange="{!v.contactIdChange}" accountIdSection1="{!v.accountIdSection1}" accountIdSection2="{!v.accountIdSection2}" currentSection="{!v.currentSection}"/>
     </div>
 

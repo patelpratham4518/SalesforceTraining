@@ -11,8 +11,9 @@ trigger ContactTrigger on Contact (after delete , after insert ,before insert, a
         // rollUp Amount
         ContactTriggerHelperClass.setTotalAmountUpdate(Trigger.new , Trigger.oldMap );
         
+        //to make work sheep problem uncomment below trigger and helper method
         //Sheep Problem
-        ContactTriggerHelperClass.changeSibblingAccount(Trigger.new,Trigger.oldMap);
+        // ContactTriggerHelperClass.changeSibblingAccount(Trigger.new,Trigger.oldMap);
     }
 
     if (Trigger.isBefore & (Trigger.isInsert | Trigger.isUpdate)) {

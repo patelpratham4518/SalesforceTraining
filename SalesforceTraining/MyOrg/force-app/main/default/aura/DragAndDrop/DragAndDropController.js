@@ -4,7 +4,7 @@
     },
     ondrop : function(component , event , helper) {
 
-            
+            console.log("Drop called");
             let contactId = component.get("v.contactIdChange")
             // console.log("contactId  from parent controler = ",contactId);
             let accountIdSection1 = component.get("v.accountIdSection1")
@@ -39,6 +39,10 @@
             })
             $A.enqueueAction(action)
     },
+
+    ondragover : function(component , event , helper){
+        event.preventDefault();
+    }
 
     
     
