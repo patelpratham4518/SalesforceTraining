@@ -1,0 +1,128 @@
+<aura:component controller="WizardComponent" >
+    <aura:attribute name="currentStep" type="String" default="step1"/>
+    <lightning:progressIndicator currentStep="{!v.currentStep}">
+        <lightning:progressStep label="Step One" value="step1"/>
+        <lightning:progressStep label="Step Two" value="step2"/>
+        <lightning:progressStep label="Step Three" value="step3"/>
+        <lightning:progressStep label="Step Three" value="step4"/>
+    </lightning:progressIndicator>
+
+    <aura:attribute name="accountId" type="Id"/>
+    <aura:attribute name="contactId" type="Id"/>
+
+    <aura:attribute name="showAccount" type="Boolean" default="true"/>
+    <aura:attribute name="showContact" type="Boolean" default="false"/>
+    <aura:attribute name="showEvent" type="Boolean" default="false"/>
+    
+    <aura:renderIf isTrue="{!v.showAccount}">
+        
+        <div class="Account">
+            <div class="header">Account</div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="accountGender">Gender</label>
+                <div class="slds-form-element__control">
+                    <select name="accountGender" id="accountGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="accountName">Account Name</label>
+                <div class="slds-form-element__control">
+                    <input type="text" id="accountName" placeholder="Enter Account Name" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="accountEmail">Email</label>
+                <div class="slds-form-element__control">
+                    <input type="email" id="accountEmail" placeholder="Enter Email" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="accountPhone">Phone</label>
+                <div class="slds-form-element__control">
+                    <input type="number" id="accountPhone" placeholder="Enter Phone" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="annualRevenue">Annual Revenue</label>
+                <div class="slds-form-element__control">
+                    <input type="number" id="annualRevenue" placeholder="Enter Annual Revenue" class="slds-input" />
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="slds-grid  slds-grid--align-center">
+            <lightning:button class="slds-button slds-button--brand" onclick="{!c.next}">Next</lightning:button>
+        </div>
+        
+    </aura:renderIf>
+    
+    <aura:renderIf isTrue="{!v.showContact}">
+        <div class="Contact">
+            <div class="header">Contact</div> 
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="contactFirstName">First Name</label>
+                <div class="slds-form-element__control">
+                    <input type="text" id="contactFirstName" placeholder="Enter First Name" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="contactLastName">Last Name</label>
+                <div class="slds-form-element__control">
+                    <input type="text" id="contactLastName" placeholder="Enter Last Name" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="contactEmail">Email</label>
+                <div class="slds-form-element__control">
+                    <input type="email" id="contactEmail" placeholder="Enter Email" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="contactPhone">Phone</label>
+                <div class="slds-form-element__control">
+                    <input type="number" id="contactPhone" placeholder="Enter Phone Number" class="slds-input" />
+                </div>
+            </div>
+            <br/>
+        </div>
+        <div class="slds-grid  slds-grid--align-center">
+            <button class="slds-button slds-button--brand" onclick="{!c.previous}">Previous</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.next}">Next</button>
+        </div>
+    </aura:renderIf>
+
+    <aura:renderIf isTrue="{!v.showEvent}">
+        <div class="Event">
+            <div class="header">Event</div>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="eventType">Event Type</label>
+                <div class="slds-form-element__control">
+                    <select name="eventType" id="eventType">
+                        <option value="Email">Email</option>
+                        <option value="Meeting">Meeting</option>
+                        <option value="Call">Call</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+        <div class="slds-grid  slds-grid--align-center">
+            <button class="slds-button slds-button--brand" onclick="{!c.previous}">Previous</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.save}">Save</button>
+        </div>
+    </aura:renderIf>
+</aura:component>	
