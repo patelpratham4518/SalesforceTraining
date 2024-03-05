@@ -1,0 +1,43 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="input" type="Boolean" default="true"/>
+    <aura:attribute name="output" type="Boolean" default="false"/>
+    <aura:renderIf isTrue="{!v.input}">
+    <div class="input">
+        <h1>Image Input</h1>
+        
+        <label for="url">
+            IMAGE URL
+            <input type="url" id="url" placeholder="enter image url"/>
+        </label>
+        <br/>
+        <label for="backgroundColor">
+            BACKGROUND COLOR
+            <input type="color" id="backgroundColor"/>
+        </label>
+        <br/>
+        <label for="description">
+            DESCRIPTION
+            <input type="text" id="description"/>
+        </label>
+        <br/>
+        <label for="fontColor">
+            FONT COLOR
+            <input type="color" id="fontColor"/>
+        </label>
+        <br/>
+        <label for="fontSize">
+            FONT SIZE
+            <input type="number" placeholder="enter font size in pixel" id="fontSize"/>
+        </label>
+        <br/>
+        <input type="button" onclick="{!c.displayImage}" value="Submit"/>
+        
+    </div>
+    </aura:renderIf>
+
+    
+        <div id="output" >
+            Pratham
+        </div>
+
+</aura:component>	
