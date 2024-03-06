@@ -37,7 +37,7 @@
 
     
         <div id="output" >
-            Pratham
+            
         </div>
 
 </aura:component>	
