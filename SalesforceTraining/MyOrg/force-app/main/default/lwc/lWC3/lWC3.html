@@ -1,0 +1,20 @@
+<template>
+    <div class="upload">
+        <lightning-input 
+          type="file"
+          label="Attachments" 
+          data-id="attachments"
+          onchange={handleChange}
+        ></lightning-input>
+    </div>
+    <div class="output">
+        <template for:each={attachmentList} for:item="attachment">
+            <div key={attachment.index}>
+                <a href={attachment.url} target="_blank">
+                    {attachment.name}
+                </a>
+            </div>
+            
+        </template>
+    </div>
+</template>
