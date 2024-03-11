@@ -1,0 +1,53 @@
+<template>
+  <lightning-card icon-name="standard:Contact" variant="base">
+    <div slot="title">
+        Create Contact
+    </div>
+    <div slot="actions">
+  
+    </div>
+    <div slot="footer">
+  
+    </div>
+    <div>
+      <!-- Card Body  -->
+      <lightning-input-name
+        label="Name Field"
+        first-name=""
+        middle-name=""
+        last-name=""
+        salutation=""
+        options={salutationOptions} 
+      ></lightning-input-name>
+      
+      <lightning-input 
+        type="email" 
+        label="Email address"
+        id="email"
+        data-id="email"
+      ></lightning-input>
+
+      <lightning-input 
+        type="tel"
+        label="Phone" 
+        name="phone" 
+        value="" 
+        data-id="phone"
+      ></lightning-input>
+
+      <lightning-input 
+        type="date" 
+        name="dob" 
+        label="Birthdate" 
+        data-id="DOB"
+      ></lightning-input>
+      
+      <lightning-button 
+        variant="success"
+        label="Create" 
+        onclick={handleClick} 
+      ></lightning-button>
+      
+    </div>
+  </lightning-card>
+</template>

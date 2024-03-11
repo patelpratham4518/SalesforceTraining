@@ -1,0 +1,7 @@
+<aura:component>    
+    <aura:attribute name="img64" type="String" default=""/>
+    <aura:attribute name="imageReference" type="String"/>
+    <div class="upload">
+        <lightning:input type="file" aura:id="fuploader" onchange="{!c.handleFilesChange}" name="file" label="Upload File" multiple="false"/>
+    </div>
+</aura:component>	
