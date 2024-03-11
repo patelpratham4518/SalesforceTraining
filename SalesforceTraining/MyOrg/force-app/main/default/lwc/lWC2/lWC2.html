@@ -1,0 +1,23 @@
+<template>
+  <div class="css">
+    <lightning-card  variant="base">
+        <div slot="title">
+          Parent Component
+        </div>
+        <div>
+          <!-- Card Body  -->
+          <lightning-input 
+          type="file"
+          label="Attach Image" 
+          accept="image/png, image/jpg,image/jpeg"
+          onchange = {handleUploadFinished}
+          data-id="image"  
+          ></lightning-input>
+          <hr/>
+          <c-lwc2-child image-url={imageUrl}></c-lwc2-child> 
+
+        </div>
+    </lightning-card>
+  </div>
+</template>
+

@@ -23,8 +23,8 @@ export default class CreateContactLWC extends LightningElement {
         let email = this.template.querySelector('[data-id="email"]').value
         let phone = this.template.querySelector('[data-id="phone"]').value
         let DOB = this.template.querySelector('[data-id="DOB"]').value
-        console.table(salutation,firstName,lastName,email,phone,DOB)
-        console.log("Type of phone",typeof phone);
+        // console.table(salutation,firstName,lastName,email,phone,DOB)
+        // console.log("Type of phone",typeof phone);
         
         createContact({
             salutation : salutation,
