@@ -15,7 +15,14 @@
               Attachments
           </div>
           <div slot="actions">
-            
+            <lightning-input 
+              type="number" 
+              name="recordsPerPage" 
+              label="Records Per Page" 
+              
+              onchange={changeRecordsPerPage}
+              value={recordsPerPage}
+            ></lightning-input>
           </div>
           <div slot="footer">
             <lightning-button-group>
@@ -37,6 +44,7 @@
             </template> -->
             <template for:each={pageList} for:item="attachment">
                 <div key={attachment.index}>
+                    
                     <a href={attachment.url} target="_blank">
                         {attachment.name}
                     </a>

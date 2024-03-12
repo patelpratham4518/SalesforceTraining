@@ -22,10 +22,10 @@ export default class LWC3 extends LightningElement {
     }
 
 
-    currentPage = 1
-    pageList = []
-    recordsPerPage = 10
-    totalPages = 1
+     currentPage = 1
+     pageList = []
+     recordsPerPage = 10
+     totalPages = 1
 
     handleNext() {
         if (this.currentPage < this.totalPages) {     
@@ -55,6 +55,20 @@ export default class LWC3 extends LightningElement {
         let begin = (this.currentPage-1)*(this.recordsPerPage)
         let end  = begin + this.recordsPerPage
         this.pageList = this.attachmentList.slice(begin,end)
+        console.log("currentPage",this.currentPage);
+        console.log("recordsPerPage",this.recordsPerPage);
+        console.log("totalPages",this.totalPages);
+        console.log("begin",begin);
+        console.log("end",end);
+
+    }
+
+    changeRecordsPerPage(event){
+        
+        this.recordsPerPage = Number(event.target.value)
+        this.totalPages = Math.ceil(this.attachmentList.length/this.recordsPerPage)
+        this.currentPage = 1
+        this.preparePaginationList()
     }
 
 }
