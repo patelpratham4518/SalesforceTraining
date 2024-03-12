@@ -16,8 +16,45 @@ export default class LWC3 extends LightningElement {
             attach.url = URL.createObjectURL(attach)
             this.attachmentList.push(attach)
         }
+        
+        this.totalPages = Math.ceil(this.attachmentList.length/this.recordsPerPage)
+        this.preparePaginationList()
+    }
 
-      
+
+    currentPage = 1
+    pageList = []
+    recordsPerPage = 10
+    totalPages = 1
+
+    handleNext() {
+        if (this.currentPage < this.totalPages) {     
+            this.currentPage += 1;
+            this.preparePaginationList();
+        }
+    }
+
+    handlePrevious() {
+        if (this.currentPage > 1) {
+            this.currentPage -= 1;
+            this.preparePaginationList();
+        }
+    }
+
+    handleFirst() {
+        this.currentPage = 1;
+        this.preparePaginationList();
+    }
+
+    handleLast() {
+        this.currentPage = this.totalPages;
+        this.preparePaginationList();
+    }
+
+    preparePaginationList(){
+        let begin = (this.currentPage-1)*(this.recordsPerPage)
+        let end  = begin + this.recordsPerPage
+        this.pageList = this.attachmentList.slice(begin,end)
     }
 
 }

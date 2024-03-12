@@ -15,20 +15,32 @@
               Attachments
           </div>
           <div slot="actions">
-        
+            
           </div>
           <div slot="footer">
-        
+            <lightning-button-group>
+              <lightning-button label="First" variant="neutral" onclick={handleFirst}></lightning-button>
+              <lightning-button label="Previous" variant="neutral" onclick={handlePrevious}></lightning-button>
+              <lightning-button label={currentPage} variant="neutral"></lightning-button>
+              <lightning-button label="Next" variant="neutral" onclick={handleNext}></lightning-button>
+              <lightning-button label="Last" variant="neutral" onclick={handleLast}></lightning-button>
+            </lightning-button-group>
           </div>
           <div>
             <!-- Card Body  -->
-            <template for:each={attachmentList} for:item="attachment">
+            <!-- <template for:each={attachmentList} for:item="attachment">
                 <div key={attachment.index}>
                     <a href={attachment.url} target="_blank">
                         {attachment.name}
                     </a>
                 </div>
-                
+            </template> -->
+            <template for:each={pageList} for:item="attachment">
+                <div key={attachment.index}>
+                    <a href={attachment.url} target="_blank">
+                        {attachment.name}
+                    </a>
+                </div>
             </template>
           </div>
         </lightning-card>
