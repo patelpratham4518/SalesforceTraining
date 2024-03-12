@@ -5,16 +5,32 @@
           label="Attachments" 
           data-id="attachments"
           onchange={handleChange}
+          multiple
         ></lightning-input>
     </div>
+    <hr/>
     <div class="output">
-        <template for:each={attachmentList} for:item="attachment">
-            <div key={attachment.index}>
-                <a href={attachment.url} target="_blank">
-                    {attachment.name}
-                </a>
-            </div>
-            
-        </template>
+        <lightning-card  variant="base">
+          <div slot="title">
+              Attachments
+          </div>
+          <div slot="actions">
+        
+          </div>
+          <div slot="footer">
+        
+          </div>
+          <div>
+            <!-- Card Body  -->
+            <template for:each={attachmentList} for:item="attachment">
+                <div key={attachment.index}>
+                    <a href={attachment.url} target="_blank">
+                        {attachment.name}
+                    </a>
+                </div>
+                
+            </template>
+          </div>
+        </lightning-card>
     </div>
 </template>
