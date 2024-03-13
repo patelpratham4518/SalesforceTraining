@@ -66,4 +66,4 @@
 
 <aura:method name="refresh" action="{!c.refresh}" access="public"/>
 
-</aura:component>	
+</aura:component>

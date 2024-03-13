@@ -1,0 +1,24 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+      <div slot="title">
+          Account
+      </div>
+      
+      <div>
+        <!-- Card Body  -->
+        <lightning-combobox
+    name="progress"
+    label=""
+    value=""
+    placeholder="Select Account"
+    options={options}
+    onchange={handleChange}
+    required
+    ></lightning-combobox>
+      </div>
+    </lightning-card>
+    
+    
+    
+
+</template>

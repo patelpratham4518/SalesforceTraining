@@ -125,4 +125,4 @@
             <button class="slds-button slds-button--brand" onclick="{!c.save}">Save</button>
         </div>
     </aura:renderIf>
-</aura:component>	
+</aura:component>

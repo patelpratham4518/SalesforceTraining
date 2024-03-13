@@ -1,8 +1,4 @@
-<aura:component implements="force:appHostable,
-                            flexipage:availableForAllPageTypes,
-                            force:hasRecordId,
-                            forceCommunity:availableForAllPageTypes,
-                            force:lightningQuickAction" access="global" controller="createContactAura"> 
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="createContactAura"> 
     <h1>Create Contact Form</h1>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
@@ -80,4 +76,4 @@
     <lightning:button label="Success"
     variant="success"
     onclick="{!c.showSuccess}"/>
-</aura:component>	
+</aura:component>

@@ -14,7 +14,7 @@ public with sharing class DragAndDrop {
     }
     @AuraEnabled
     public static void changeAccount(Id contactId , Id accountId){
-            
+        
             System.debug('ContactId = '+contactId + 'AccountId' + accountId);
             Contact contact = [select Id,AccountId from Contact where Id = :contactId];
             contact.AccountId = accountId;

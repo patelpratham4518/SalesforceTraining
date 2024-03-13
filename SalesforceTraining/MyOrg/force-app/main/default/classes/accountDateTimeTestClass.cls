@@ -1,4 +1,3 @@
-
 @isTest(seeAllData = true)
 private class accountDateTimeTestClass {
 

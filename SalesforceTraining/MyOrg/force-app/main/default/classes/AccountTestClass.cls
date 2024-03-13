@@ -68,6 +68,7 @@ private class AccountTestClass {
         account.Gender__c = 'Male';
         account.Phone = '7984237081';
         insert account;
+
     }
 
 

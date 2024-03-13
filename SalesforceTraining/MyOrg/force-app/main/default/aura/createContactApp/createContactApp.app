@@ -2,5 +2,4 @@
 <!-- <c:ContactDisplayComp/> -->
 <!-- <c:DragAndDrop/> -->
 <c:AccountWrapper/>
-</aura:application>	
-  
+</aura:application>

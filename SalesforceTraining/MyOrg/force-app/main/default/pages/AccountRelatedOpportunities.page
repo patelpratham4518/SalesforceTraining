@@ -1,6 +1,6 @@
-<apex:page  controller="AccountRelatedOpportunities">
-    <apex:form>
-        <apex:pageBlock>
+<apex:page controller="AccountRelatedOpportunities">
+    <apex:form >
+        <apex:pageBlock >
             <apex:pageBlockSection title="AccountRelatedOpportunities">
                 <apex:inputField label="Choose Account" value="{!contact.AccountId}"/>
                 <apex:commandButton value="See Related Opportunities" action="{!seeOpportunities}"/>
@@ -11,4 +11,3 @@
         </apex:pageBlock>
     </apex:form>
 </apex:page>
-

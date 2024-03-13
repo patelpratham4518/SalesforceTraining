@@ -1,0 +1,9 @@
+<apex:page standardController="Opportunity" extensions="addFileToOpportunity" action="{!attach}">
+<apex:form >
+    <apex:pageBlock >
+<apex:inputHidden value="{!Opportunity.Id}"/>
+<apex:image id="imgToadd" url="{!resImageUrl}" value="{!imageForVfp}" />
+   
+     </apex:pageBlock>
+</apex:form>
+</apex:page>

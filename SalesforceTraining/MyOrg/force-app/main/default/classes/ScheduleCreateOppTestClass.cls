@@ -1,4 +1,3 @@
-
 @isTest
 private class ScheduleCreateOppTestClass {
 
@@ -11,4 +10,14 @@ private class ScheduleCreateOppTestClass {
         Test.stopTest();
     }
 
+
+    @IsTest(seeAllData=true)
+    static void updateAccountNameWithOpportunity(){
+        
+        Test.startTest();
+        updateAccountNameWithOpportunity batch = new updateAccountNameWithOpportunity();
+        Database.executebatch(batch);
+        Test.stopTest();
+        
+    }
 }

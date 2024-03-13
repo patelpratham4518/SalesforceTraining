@@ -73,7 +73,10 @@ public with sharing class ContactTriggerHelperClass {
                 Account relatedAccount  = [select Id,Max_Amount_For_Contact__c from Account where Id =: contact.AccountId];
 
                
-
+                // if (relatedAccount.Max_Amount_For_Contact__c == 0) {
+                //     contact.Amount__c.addError('Your parent account has zero amount Limit');
+                // }
+                // else {
                     if (contact.Amount__c > relatedAccount.Max_Amount_For_Contact__c) {
 
                         if (relatedAccount.Max_Amount_For_Contact__c == 0) {

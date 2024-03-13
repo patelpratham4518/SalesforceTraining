@@ -11,6 +11,7 @@ global  class updateAccountNameWithOpportunity implements Database.Batchable<sOb
             opportunity.Name = opportunity.Account.Name;
         }
         update Opportunities;
+
     }
     global void finish(Database.BatchableContext bc){
         System.debug('Finished updating account name with opportunity.');

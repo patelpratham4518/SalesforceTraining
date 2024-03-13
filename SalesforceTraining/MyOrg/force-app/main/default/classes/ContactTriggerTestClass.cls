@@ -7,6 +7,7 @@ private class ContactTriggerTestClass {
         account.Gender__c = 'Male';
         account.Max_Amount_For_Contact__c = 1000;
         insert Account;
+        
         Contact contact = [select Id,Name from Contact];
         
     }
@@ -76,6 +77,8 @@ private class ContactTriggerTestClass {
         update contact;
         contactCount = [select count() from Contact where AccountId =:account.Id];
         Assert.areEqual(4,contactCount);
+
+
         
         Test.stopTest();
     }

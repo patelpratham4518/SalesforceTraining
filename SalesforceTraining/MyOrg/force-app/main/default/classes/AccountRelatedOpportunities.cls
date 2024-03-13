@@ -15,5 +15,4 @@ public  class AccountRelatedOpportunities {
         List<Opportunity> Opportunities = [select Name from Opportunity where AccountId =: AccountId];
         return Opportunities;
     } 
-    
 }

@@ -64,6 +64,7 @@
         <lightning:button label="Next" onclick="{!c.next}"/>
         <lightning:button label="Last" onclick="{!c.last}"/>
         Showing {!v.start+1} to {!v.end+1} from {!v.totalSize}
+        
     </tbody>
 </table>
 

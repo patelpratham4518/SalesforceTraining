@@ -1,12 +1,12 @@
 <apex:page controller="ContactPagination">
-<apex:form>
-<apex:pageBlock>
+<apex:form >
+<apex:pageBlock >
         <apex:pageBlockSection title="View Contacts">
             <apex:dataList value="{!contacts}" var="contact">
                 {!contact.Name}
             </apex:dataList>
         </apex:pageBlockSection>
-        <apex:pageBlockButtons>
+        <apex:pageBlockButtons >
             <apex:commandButton action="{!beginning}" value="<<"/> 
             <apex:commandButton action="{!previous}" value="<"/>
             <apex:commandButton action="{!next}" value=">"/>
@@ -25,8 +25,8 @@
 
 
 <!-- <apex:page standardController="Contact" recordSetVar="contacts">
-    <apex:pageBlock>
-        <apex:form>
+    <apex:pageBlock >
+        <apex:form >
         <apex:pageBlockSection title="Contacts">
             <apex:dataList var="c" value="{!contacts}">
                 {!c.Name}
