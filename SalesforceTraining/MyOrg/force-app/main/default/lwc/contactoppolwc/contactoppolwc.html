@@ -5,18 +5,28 @@
         Contacts
       </div>
       <div>
-        <!-- Card Body  -->
-        <!-- <lightning-layout 
-          horizontal-align="center"
-          vertical-align="start"
-        > -->
+       
           
             <template for:each={conList} for:item="contact">
-                <div key={contact.Id}>
+                <!-- <div key={contact.Id}>
                     {contact.Name}
-                </div>
+                </div> -->
+               <lightning-layout 
+                 horizontal-align="center"
+                 vertical-align="start"
+                 key={contact.Id}
+                 class="slds-m-top--small">
+                 <lightning-layout-item size="1">
+                   <lightning-icon 
+                     icon-name="standard:contact" 
+                   ></lightning-icon>
+                 </lightning-layout-item>
+                 <lightning-layout-item size="10">
+                    <strong class="custom-class">{contact.Name}</strong>
+                 </lightning-layout-item>
+               </lightning-layout>
             </template>
-        <!-- </lightning-layout> -->
+        
       </div>
     </lightning-card>  
 
@@ -25,18 +35,29 @@
             Opportunities
         </div>
         <div>
-          <!-- Card Body  -->
-          <!-- <lightning-layout 
-            horizontal-align="center"
-            vertical-align="start"
-          > -->
+         
             
           <template for:each={oppList} for:item="opp">
-              <div key={opp.Id}>
+              <!-- <div key={opp.Id}>
                   {opp.Name}
-                </div>
+                </div> -->
+                <lightning-layout 
+                 horizontal-align="center"
+                 vertical-align="start"
+                 key={opp.Id}
+                 class="slds-m-top--small">
+                 <lightning-layout-item size="1">
+                   <lightning-icon 
+                     icon-name="standard:opportunity" 
+                   ></lightning-icon>
+                 </lightning-layout-item>
+                 <lightning-layout-item size="10">
+                    <strong class="custom-class">{opp.Name}</strong>
+                 </lightning-layout-item>
+                 
+               </lightning-layout>
             </template>
-        <!-- </lightning-layout> -->
+        
         </div>
       </lightning-card>  
 </template>
