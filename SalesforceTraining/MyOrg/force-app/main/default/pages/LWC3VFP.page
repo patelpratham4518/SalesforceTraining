@@ -1,0 +1,21 @@
+
+<apex:page>
+        <apex:includeLightning />
+    
+        <div id="lightning-container"></div>
+    
+        <script>
+            $Lightning.use("c:createContactApp", function() {
+                $Lightning.createComponent(
+                    "c:lWC3",
+                    {},
+                    "lightning-container",
+                    function(cmp) {
+                        // Component created successfully
+                        console.log("Component created successfully");
+                    }
+                );
+            });
+        </script>
+</apex:page>
+    
