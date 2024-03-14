@@ -1,6 +1,9 @@
 import { LightningElement,track ,wire} from 'lwc';
 import getObjectList from '@salesforce/apex/LWC5.getObjectList'
 import getEmailId from '@salesforce/apex/LWC5.getEmailId'
+import sendEmail from '@salesforce/apex/LWC5.sendEmail'
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
+
 
 export default class LWC5 extends LightningElement {
 
@@ -40,6 +43,7 @@ export default class LWC5 extends LightningElement {
             this.currentStep = "2";
         }
         else if(this.currentStep = "2"){
+            this.setToEmail()
             this.currentStep = "3";
         }
     }
@@ -54,7 +58,16 @@ export default class LWC5 extends LightningElement {
     }
  
     handleFinish(){
-        alert("Email sent !!!")
+        sendEmail({
+            emailList : this.emailList,
+            subject : this.subject,
+            message : this.message
+        }).then(response => {
+            
+            this.showSuccessToast()
+        }).catch(error => {
+            console.log("Error = ",error);
+        })
     }
 
     objects = [
@@ -76,6 +89,7 @@ export default class LWC5 extends LightningElement {
     @track objectList
     @track iconName
     selectedRecordsEmail = new Map()
+    emailList
     
 
     handleObjectSelection(event){
@@ -92,7 +106,7 @@ export default class LWC5 extends LightningElement {
     }
 
     selectRecord(event){
-        
+
         let selectedRecord = event.target.value
         if (event.target.checked) {
 
@@ -113,6 +127,34 @@ export default class LWC5 extends LightningElement {
             this.selectedRecordsEmail.delete(selectedRecord)
         }
     }
+
+    subject
+    handleSubjectChange(event){
+        this.subject = event.target.value
+    }
+    message
+    handleMessageChange(event){
+        this.message = event.target.value
+    }
+    toEmail
+    setToEmail(){
+        // this.toEmail = this.selectedRecordsEmail.values().toArray().join(" , ")
+        this.emailList = this.selectedRecordsEmail.values().toArray()
+        // const emailSet = new Set(this.emailList)
+        // const emailArray = Array.from(emailSet)
+        this.toEmail = this.emailList.join(" , ")
+    }
+
+    showSuccessToast() {
+        const evt = new ShowToastEvent({
+            title: 'Toast Success',
+            message: 'Email Sent Sucessfully !!!',
+            variant: 'success',
+            mode: 'dismissable'
+        });
+        this.dispatchEvent(evt);
+    }
+    
 
 
 }

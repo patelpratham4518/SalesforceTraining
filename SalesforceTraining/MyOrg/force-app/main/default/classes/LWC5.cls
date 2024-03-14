@@ -25,4 +25,16 @@ public with sharing class LWC5 {
             return null;
         }
     }
+
+    @AuraEnabled
+    public static void sendEmail(List<String> emailList , String subject , String message){
+        try {
+            System.debug('emailList : '+emailList);
+            System.debug('subject : '+subject);
+            System.debug('message : '+message);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+            
+        }
+    }
 }
