@@ -65,6 +65,7 @@ export default class LWC5 extends LightningElement {
         }).then(response => {
             
             this.showSuccessToast()
+            window.location.reload()
         }).catch(error => {
             console.log("Error = ",error);
         })
@@ -94,7 +95,7 @@ export default class LWC5 extends LightningElement {
 
     handleObjectSelection(event){
         this.objectType = event.detail.value
-        this.iconName = `standard:${this.objectType}`
+        this.iconName = `standard:${(this.objectType).toLowerCase()}`
         getObjectList({
             objectType : this.objectType
         }).then(response => {
@@ -138,11 +139,21 @@ export default class LWC5 extends LightningElement {
     }
     toEmail
     setToEmail(){
-        // this.toEmail = this.selectedRecordsEmail.values().toArray().join(" , ")
+        
         this.emailList = this.selectedRecordsEmail.values().toArray()
-        // const emailSet = new Set(this.emailList)
-        // const emailArray = Array.from(emailSet)
         this.toEmail = this.emailList.join(" , ")
+        const emailSet = new Set(this.emailList)
+        console.log("emaiSet = ",emailSet);
+
+        const newEmailArray = [...emailSet]
+        console.log(newEmailArray);
+
+        // const newEmailArray = Array.from(emailSet)
+        // const newEmailArray = []
+        // emailSet.forEach(element => {
+            //     newEmailArray.push(element)
+            // });
+            
     }
 
     showSuccessToast() {
