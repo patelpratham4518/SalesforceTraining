@@ -94,6 +94,7 @@ export default class LWC5 extends LightningElement {
     
 
     handleObjectSelection(event){
+        
         this.objectType = event.detail.value
         this.iconName = `standard:${(this.objectType).toLowerCase()}`
         getObjectList({
@@ -141,19 +142,10 @@ export default class LWC5 extends LightningElement {
     setToEmail(){
         
         this.emailList = this.selectedRecordsEmail.values().toArray()
-        this.toEmail = this.emailList.join(" , ")
         const emailSet = new Set(this.emailList)
-        console.log("emaiSet = ",emailSet);
-
-        const newEmailArray = [...emailSet]
-        console.log(newEmailArray);
-
-        // const newEmailArray = Array.from(emailSet)
-        // const newEmailArray = []
-        // emailSet.forEach(element => {
-            //     newEmailArray.push(element)
-            // });
-            
+        this.emailList = [...emailSet]
+        this.toEmail = this.emailList.join(" , ")
+                
     }
 
     showSuccessToast() {
