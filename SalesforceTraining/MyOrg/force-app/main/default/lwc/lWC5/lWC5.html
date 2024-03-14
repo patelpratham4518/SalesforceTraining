@@ -1,0 +1,84 @@
+<template>
+    
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <lightning-progress-step label="Step 1" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+            <lightning-progress-step label="Step 2" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+            <lightning-progress-step label="Step 3" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+        </lightning-progress-indicator>
+
+        <lightning-card  variant="base">
+          <div slot="title">
+              Step {currentStep}
+          </div>
+          <div slot="actions">
+        
+          </div>
+          <div slot="footer">
+            <template if:true={isEnablePrev}>
+                <lightning-button variant="base" label="Back" onclick={handlePrev}></lightning-button>
+            </template>
+            
+            <template if:true={isEnableNext}>
+                <lightning-button label="Next" variant="brand" onclick={handleNext}></lightning-button>
+            </template>
+            <template if:true={isEnableFinish}>
+                <lightning-button label="Finish" variant="brand" onclick={handleFinish}></lightning-button>
+            </template>
+          </div>
+          <div>
+            <!-- Card Body  -->
+            <template if:true={isStepOne}>
+                <div>
+                    <!-- Step 1 -->
+                    <lightning-combobox
+                      name="object"
+                      label="Object"
+                      value={objectType}
+                      placeholder="Select Object"
+                      options={objects}
+                      onchange={handleObjectSelection} 
+                      required
+                    ></lightning-combobox>
+                    <template  for:each={objectList} for:item="object">
+                        <lightning-layout 
+                          vertical-align="start"
+                          class="slds-m-top--small"
+                          key={object.Id}>
+                          
+                          <lightning-layout-item>
+                            <lightning-icon 
+                              icon-name="standard:contact"
+                              size="small" 
+                            ></lightning-icon>
+                          </lightning-layout-item>
+            
+                          <lightning-layout-item>
+                            <strong class="custom-class">{object.Name}</strong>                
+                          </lightning-layout-item>
+
+                          <lightning-layout-item size="1">
+                            <lightning-input 
+                              type="checkbox"
+                              value={object.Id}
+                              onchange={selectRecord}
+                            ></lightning-input>
+                          </lightning-layout-item>
+
+                        </lightning-layout>
+                    </template>
+                </div>
+            </template>
+            <template if:true={isStepTwo}>
+                <div>
+                    Step 2
+                </div>
+            </template>
+            <template if:true={isStepThree}>
+                <div>
+                    Step 3
+                </div>
+            </template>
+          </div>
+        </lightning-card>
+</template>
+
