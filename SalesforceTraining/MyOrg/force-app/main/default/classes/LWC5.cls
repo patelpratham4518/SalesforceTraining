@@ -13,6 +13,7 @@ public with sharing class LWC5 {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
     @AuraEnabled
     public static String getEmailId(String objectType,String recordId){
         if (objectType == 'Account') {
@@ -32,6 +33,13 @@ public with sharing class LWC5 {
             System.debug('emailList : '+emailList);
             System.debug('subject : '+subject);
             System.debug('message : '+message);
+
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            mail.setToAddresses(emailList);
+            mail.setSubject(subject);
+            mail.setPlainTextBody(message);
+            Messaging.SendEmailResult[] results = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+            System.debug(results);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
             
