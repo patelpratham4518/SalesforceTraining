@@ -30,10 +30,7 @@ public with sharing class LWC5 {
     @AuraEnabled
     public static void sendEmail(List<String> emailList , String subject , String message){
         try {
-            System.debug('emailList : '+emailList);
-            System.debug('subject : '+subject);
-            System.debug('message : '+message);
-
+           
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             mail.setToAddresses(emailList);
             mail.setSubject(subject);

@@ -1,0 +1,45 @@
+<template>
+
+ 
+    <lightning-card  variant="base">
+      <div slot="title">
+          LWC6
+      </div>
+      <div>
+        <!-- Card Body  -->
+        <lightning-dual-listbox name="sObjects"
+        label="Select sObject"
+        source-label="Available"
+        selected-label="Selected"
+        field-level-help="Select your preferred sObject"
+        options={options}
+        onchange={handleChange}></lightning-dual-listbox>
+
+
+        <div class="slds-m-bottom_small">
+            <lightning-input type="text"
+               value={searchValue}
+               label="Search Keyword"
+               onchange={searchKeyword}
+               ></lightning-input>
+         </div>
+         
+         <lightning-button label="Search"
+            onclick={handleSearchKeyword}
+            variant="brand"></lightning-button>
+      </div>
+      <template if:true={responseRecords} for:each={responseRecordsKeys} for:item="object">
+      <div key={object}>
+        <div>
+          {object}
+        </div>
+        <!-- <div>
+          <template for:each={responseRecords.objects} for:item="record">
+            {record}
+          </template>
+        </div> -->
+      </div>
+
+      </template>
+    </lightning-card>
+</template>
