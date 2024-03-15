@@ -28,18 +28,41 @@
             onclick={handleSearchKeyword}
             variant="brand"></lightning-button>
       </div>
-      <template if:true={responseRecords} for:each={responseRecordsKeys} for:item="object">
-      <div key={object}>
-        <div>
-          {object}
-        </div>
-        <!-- <div>
-          <template for:each={responseRecords.objects} for:item="record">
-            {record}
-          </template>
-        </div> -->
-      </div>
+    </lightning-card>
 
-      </template>
+    <lightning-card  variant="base">
+      <div slot="title">
+          Related Records
+      </div>
+      <div>
+        <!-- Card Body  -->
+        <template if:true={responseRecords} for:each={responseRecords} for:item="wrapper">
+          <lightning-layout 
+            vertical-align="start"
+            key={wrapper.record.Id}
+          >
+            <lightning-layout-item size="1">
+              <lightning-icon 
+                icon-name={wrapper.Icon} 
+                alternative-text="sObject" 
+                size="medium" 
+                title="large size"
+                variant="inverse"
+              ></lightning-icon>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+              sObject Type : {wrapper.Type}
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+              Record Name : {wrapper.record.Name}
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+              Record Id : {wrapper.record.Id}
+            </lightning-layout-item>
+          </lightning-layout>
+          <hr key={wrapper.record.Id}>
+        </template>
+
+      </div>
     </lightning-card>
 </template>

@@ -6,7 +6,6 @@ export default class LWC6 extends LightningElement {
     selected = [];
     searchValue
     responseRecords
-    responseRecordsKeys = []
 
     get options() {
         return [
@@ -44,7 +43,6 @@ export default class LWC6 extends LightningElement {
         }).then(response => {
             console.log('Response = ',response);
             this.responseRecords = response
-            this.responseRecordsKeys = Object.getOwnPropertyNames(this.responseRecords)
         }).catch(error => {
             console.log('Error message : ',error);
         })
