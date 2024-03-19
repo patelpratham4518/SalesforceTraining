@@ -13,21 +13,40 @@ public with sharing class GMAIL_Integration {
     }
 
     @AuraEnabled
-    public static String sendEmail(List<String> toEmail , String subject , String message,List<String> attachments){
+    public static String sendEmail(List<String> toEmail , String subject , String message,List<String> attachments,List<String> attachmentsMap){
         try {
-            System.debug(attachments);
+            // System.debug(attachmentsMap);
+            for (String attach : attachmentsMap) {
+                attachment file =  (attachment) System.JSON.deserialize(attach, attachment.class);
+                System.debug(file.name);
+                System.debug(file.type);
+                System.debug(file.base64String);
+                
+            }
+            
             
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             mail.setToAddresses(toEmail);
             mail.setSubject(subject);
             mail.setPlainTextBody(message);
-            for (String attachment : attachments) {
-                Blob attachBlob = EncodingUtil.base64Decode(attachment);
+            List<Messaging.EmailFileAttachment> attachList = new List<Messaging.EmailFileAttachment>();
+            for (String attach : attachmentsMap) {
+                attachment file =  (attachment) System.JSON.deserialize(attach, attachment.class);
+                Blob attachBlob = EncodingUtil.base64Decode(file.base64String);
                 Messaging.EmailFileAttachment emailAttachment = new Messaging.EmailFileAttachment();
-                emailAttachment.setFileName('attachment');
+                emailAttachment.setFileName(file.name);
+                emailAttachment.setContentType(file.type);
                 emailAttachment.setBody(attachBlob);
-                mail.setFileAttachments(new Messaging.EmailFileAttachment[] {emailAttachment});
+                attachList.add(emailAttachment);
             }
+            mail.setFileAttachments(attachList);
+            // for (String attachment : attachments) {
+            //     Blob attachBlob = EncodingUtil.base64Decode(attachment);
+            //     Messaging.EmailFileAttachment emailAttachment = new Messaging.EmailFileAttachment();
+            //     emailAttachment.setFileName('attachment');
+            //     emailAttachment.setBody(attachBlob);
+            //     mail.setFileAttachments(new Messaging.EmailFileAttachment[] {emailAttachment});
+            // }
             Messaging.SendEmailResult[] results = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
             System.debug(results);
             return 'Success';
@@ -35,5 +54,12 @@ public with sharing class GMAIL_Integration {
             System.debug(e);
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    public class attachment{
+        public String name;
+        public String type;
+        public String url;
+        public String base64String;
     }
 }
