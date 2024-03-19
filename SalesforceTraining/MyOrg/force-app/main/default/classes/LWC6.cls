@@ -21,25 +21,31 @@ public with sharing class LWC6 {
             for (Integer j = 0; j < searchList[i].size(); j++) {
                 System.debug(searchList[i][j]);
                 ObjectWrapper objWrapper = new ObjectWrapper();
+
                 // objWrapper.Id = searchList[i][j].Id;
                 // objWrapper.Name = searchList[i][j].Name;
                 // objWrapper.Name = 'Name';
+
                 objWrapper.record = searchList[i][j];
+
                 objWrapper.Type = selected[i];
                 objWrapper.Icon = 'standard:'+selected[i].toLowerCase();
                 wrapperList.add(objWrapper);
             }
+           
         }
         return wrapperList;
    }
 
     public class ObjectWrapper {
-        @AuraEnabled
         // @AuraEnabled
         // public String Id{get;set;}
         // @AuraEnabled
         // public String Name{get;set;}
+
+        @AuraEnabled
         public sObject record{get;set;}
+
         @AuraEnabled
         public String Type{get;set;}
         @AuraEnabled
