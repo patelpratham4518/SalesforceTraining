@@ -13,7 +13,7 @@
              label="Attachment" 
              onchange={handleUploadFinished}
            ></lightning-input>
-           <template for:each={attachments} for:item="attachment">
+           <template for:each={attachmentsList} for:item="attachment">
             <lightning-layout 
               vertical-align="start"
               key={attachment.name}

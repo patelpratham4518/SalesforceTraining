@@ -6,7 +6,7 @@ export default class GmailIntegration extends LightningElement {
     toEmail
     subject
     message
-    @track attachments = []
+    
     connectedCallback(){
         this.getRecordId(window.location.href)
     }
@@ -34,12 +34,7 @@ export default class GmailIntegration extends LightningElement {
     }
     sendEmail(){
         
-        // console.log(this.attachmentsMap);
-        // for (const iterator of this.attachmentsMap) {
-        //     for (const key in iterator[1]) {
-        //         console.log(key," = ",iterator[1][key]);
-        //     }
-        // }
+        
 
         let attachmentsArrayForApex = []
         for (const iterator of this.attachmentsMap.values()) {
@@ -47,33 +42,23 @@ export default class GmailIntegration extends LightningElement {
             attachmentsArrayForApex.push(JSON.stringify(iterator))
         }
         
-        
-
-        let base64Array = []
-        this.attachments.forEach(element => {
-            // console.log(element);
-            base64Array.push(element.base64String)
-        });
-        
-        
-
-        
+        console.table(this.toEmail,this.subject,this.message,attachmentsArrayForApex)
         sendEmail({
             toEmail : [this.toEmail],
             subject : this.subject,
             message : this.message,
-            attachments : base64Array,
             attachmentsMap : attachmentsArrayForApex
-            // attachments : this.attachments
         }).then(response =>{
             console.log("Email sent",response);
         }).catch(error => {
             console.log("Error = ",error);
         })
     }
-    attachmentsMap = new Map()
+    @track attachmentsMap = new Map()
+    @track attachmentsList 
+
     handleUploadFinished(event){
-        // console.log("Attached");
+        
         const file = event.target.files[0];
         file.url = URL.createObjectURL(file)
         const reader = new FileReader();
@@ -83,13 +68,13 @@ export default class GmailIntegration extends LightningElement {
                 .replace(/^.+,/, '');
             // console.log("base64 = ",base64String);  
             file.base64String = base64String 
-            this.attachments.push(file)
             this.attachmentsMap.set(file.name,{
                 name : file.name,
                 type : file.type,
                 url : file.url,
                 base64String : file.base64String,
             })
+            this.attachmentsList = [...this.attachmentsMap.values()]
               
         };
         reader.readAsDataURL(file);
