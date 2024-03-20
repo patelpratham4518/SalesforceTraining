@@ -1,4 +1,5 @@
 import { LightningElement } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import  createFolderForRecordId from '@salesforce/apex/DropBox.createFolderForRecordId'
 import  uploadFiles from '@salesforce/apex/DropBox.uploadFiles'
 
@@ -35,11 +36,12 @@ export default class DropBox extends LightningElement {
                 type : file.type,
                 base64String : base64String
             })
-            console.log(jsonFile);
+            // console.log(jsonFile);
             uploadFiles({
                 recordId : this.recordId,
                 JSONfile : jsonFile
             }).then((response) => {
+                this.showSuccessToast()
                 console.log("Uploaded");
             }).catch((error)=> {
                 console.log("Error : ",error);
@@ -47,14 +49,21 @@ export default class DropBox extends LightningElement {
            
         };
         reader.readAsDataURL(file);
-
         
+    }
 
-       
-
-       
-        
-        
+    showSuccessToast() {
+        try {     
+            const evt = new ShowToastEvent({
+                title: 'File Uploaded',
+                message: 'File Uploaded to dropbox !!!',
+                variant: 'success',
+                mode: 'dismissable'
+            });
+            this.dispatchEvent(evt);
+        } catch (error) {
+            console.log(error);
+        }
         
     }
 
