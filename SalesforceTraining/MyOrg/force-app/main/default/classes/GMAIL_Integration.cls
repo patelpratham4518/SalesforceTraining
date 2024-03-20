@@ -25,23 +25,23 @@ public with sharing class GMAIL_Integration {
             }
             
             
-            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-            mail.setToAddresses(toEmail);
-            mail.setSubject(subject);
-            mail.setPlainTextBody(message);
-            List<Messaging.EmailFileAttachment> attachList = new List<Messaging.EmailFileAttachment>();
-            for (String attach : attachmentsMap) {
-                attachment file =  (attachment) System.JSON.deserialize(attach, attachment.class);
-                Blob attachBlob = EncodingUtil.base64Decode(file.base64String);
-                Messaging.EmailFileAttachment emailAttachment = new Messaging.EmailFileAttachment();
-                emailAttachment.setFileName(file.name);
-                emailAttachment.setContentType(file.type);
-                emailAttachment.setBody(attachBlob);
-                attachList.add(emailAttachment);
-            }
-            mail.setFileAttachments(attachList);
-            Messaging.SendEmailResult[] results = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
-            System.debug(results);
+            // Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            // mail.setToAddresses(toEmail);
+            // mail.setSubject(subject);
+            // mail.setPlainTextBody(message);
+            // List<Messaging.EmailFileAttachment> attachList = new List<Messaging.EmailFileAttachment>();
+            // for (String attach : attachmentsMap) {
+            //     attachment file =  (attachment) System.JSON.deserialize(attach, attachment.class);
+            //     Blob attachBlob = EncodingUtil.base64Decode(file.base64String);
+            //     Messaging.EmailFileAttachment emailAttachment = new Messaging.EmailFileAttachment();
+            //     emailAttachment.setFileName(file.name);
+            //     emailAttachment.setContentType(file.type);
+            //     emailAttachment.setBody(attachBlob);
+            //     attachList.add(emailAttachment);
+            // }
+            // mail.setFileAttachments(attachList);
+            // Messaging.SendEmailResult[] results = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+            // System.debug(results);
             return 'Success';
         } catch (Exception e) {
             System.debug(e);

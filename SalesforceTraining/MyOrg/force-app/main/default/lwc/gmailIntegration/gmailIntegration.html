@@ -1,7 +1,7 @@
 <template>
     <lightning-card title="Draft Email">
         <div slot="footer">
-                  <lightning-button label="Send" variant="success" onclick={sendEmail}></lightning-button>
+                  <lightning-button label="Send" variant="neutral" onclick={sendEmail}></lightning-button>
         </div>
         <div class="slds-p-around_medium">
             <!-- Input fields for email address, subject, and message -->
@@ -23,7 +23,9 @@
                     {attachment.name}
                 </a>
               </lightning-layout-item>
-              
+              <lightning-layout-item>
+            <lightning-button-icon icon-name="utility:delete"    alternative-text="Delete"    title="Delete" variant="border-filled" size="xx-small" onclick={deleteAttach} value={attachment.name}></lightning-button-icon>
+              </lightning-layout-item>
             </lightning-layout>
            </template>
         </div>

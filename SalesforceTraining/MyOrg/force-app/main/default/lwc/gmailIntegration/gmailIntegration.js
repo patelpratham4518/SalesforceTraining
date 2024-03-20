@@ -1,6 +1,7 @@
 import { LightningElement, api, track } from 'lwc';
 import getEmailId from '@salesforce/apex/GMAIL_Integration.getEmailId'
 import sendEmail from '@salesforce/apex/GMAIL_Integration.sendEmail'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 export default class GmailIntegration extends LightningElement {
     recordId
     toEmail
@@ -42,7 +43,7 @@ export default class GmailIntegration extends LightningElement {
             attachmentsArrayForApex.push(JSON.stringify(iterator))
         }
         
-        console.table(this.toEmail,this.subject,this.message,attachmentsArrayForApex)
+        
         sendEmail({
             toEmail : [this.toEmail],
             subject : this.subject,
@@ -50,6 +51,7 @@ export default class GmailIntegration extends LightningElement {
             attachmentsMap : attachmentsArrayForApex
         }).then(response =>{
             console.log("Email sent",response);
+            this.showSuccessToast()
         }).catch(error => {
             console.log("Error = ",error);
         })
@@ -78,6 +80,27 @@ export default class GmailIntegration extends LightningElement {
               
         };
         reader.readAsDataURL(file);
+    }
+
+    deleteAttach(event){
+        const name = event.target.value 
+        this.attachmentsMap.delete(name)
+        this.attachmentsList = [...this.attachmentsMap.values()]
+        
+    }
+    showSuccessToast() {
+        try {     
+            const evt = new ShowToastEvent({
+                title: 'Toast Success',
+                message: 'Email Sent Sucessfully !!!',
+                variant: 'success',
+                mode: 'dismissable'
+            });
+            this.dispatchEvent(evt);
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 
 }
