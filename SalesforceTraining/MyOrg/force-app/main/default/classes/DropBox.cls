@@ -37,14 +37,17 @@ public with sharing class DropBox {
         // System.debug(file.name);
         // System.debug(file.type);
         // System.debug(file.base64String);
-        // uploadFile(recordId,file.name,file.type,EncodingUtil.base64Decode(file.base64String));    
+        uploadFile(recordId,file.name,EncodingUtil.base64Decode(file.base64String));    
 
 
     }
 
     @future(callout=true)
-    public static void uploadFile(String folderName, String fileName, String type ,Blob fileData) {
+    public static void uploadFile(String folderName, String fileName,Blob fileData) {
 
+        // System.debug(folderName);
+        // System.debug(fileName);
+        // System.debug(fileData);
         String dropboxUploadUrl = 'https://content.dropboxapi.com/2/files/upload';
         String dropboxFilePath = '/' + folderName + '/' + fileName;    
         Map<String, Object> requestBodyMap = new Map<String, Object>{
@@ -58,8 +61,7 @@ public with sharing class DropBox {
         HttpRequest req = new HttpRequest();
         req.setEndpoint(dropboxUploadUrl);
         req.setHeader('Authorization', 'Bearer ' + DropBox_Token);
-        req.setHeader('Content-Type', type);
-        // req.setHeader('Content-Type', 'application/octet-stream');
+        req.setHeader('Content-Type', 'application/octet-stream');
         req.setHeader('Dropbox-API-Arg', requestBody);
         req.setMethod('POST');
         req.setBodyAsBlob(fileData);   
