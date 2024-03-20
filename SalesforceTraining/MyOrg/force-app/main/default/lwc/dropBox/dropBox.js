@@ -38,7 +38,7 @@ export default class DropBox extends LightningElement {
             console.log(jsonFile);
             uploadFiles({
                 recordId : this.recordId,
-                file : jsonFile
+                JSONfile : jsonFile
             }).then((response) => {
                 console.log("Uploaded");
             }).catch((error)=> {
