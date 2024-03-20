@@ -45,7 +45,8 @@ export default class GmailIntegration extends LightningElement {
         
         
         sendEmail({
-            toEmail : [this.toEmail],
+            // toEmail : [this.toEmail],
+            toEmail : this.toEmail.split(','),
             subject : this.subject,
             message : this.message,
             attachmentsMap : attachmentsArrayForApex
