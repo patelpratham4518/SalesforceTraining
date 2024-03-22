@@ -5,4 +5,12 @@
       label="Upload To DropBox"
       onchange={handleUpload} 
     ></lightning-input>
+
+    <lightning-datatable
+      key-field="fileName"
+      onrowaction={callRowAction}
+      data={fileNamesDataTable}
+      columns={columns}
+      hide-checkbox-column="true"
+    ></lightning-datatable>
 </template>
