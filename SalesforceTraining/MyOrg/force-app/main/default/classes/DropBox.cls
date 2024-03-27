@@ -1,13 +1,53 @@
 public with sharing class DropBox {
-
-    public static final String DropBox_Token = '';
-
     public static final String DropBox_CreateFolder_URL = 'https://api.dropboxapi.com/2/files/create_folder_v2';
 
+    // public static  String DropBox_Token = 'sl.ByIsA6Snj9abp3nF6N1IJIihbX8BRDnTjAeyx3R6Np7YbdmF9P3IsPiEgcd69GEQFzbWm8eC10aZC2y3UtS6cXaTvegal7CanQwCyWe7E9jm08pPi7vDkragPqGDqSi5RGZFScbcquoB3m_KK9YN';
+    public static  String DropBox_Token = '';
     
+    public static  String DropBox_Refresh_Token = 'Unb0AZw7-ocAAAAAAAAAAcY4_0-PQErfYEzFK7h1UJcgc8ELkGAqlO9b88I87PxR';
+    public static final String DropBox_App_Key = 'hky6aln24sfvfu6';
+    public static final String DropBox_App_Secret = 'wmaqqqnefush0wa';
+    
+
+
 
     public DropBox() {
 
+    }
+
+    public static void setToken(){
+        System.debug('refersh token');
+        String DropBox_ACCESS_TOKEN_URL = 'https://api.dropbox.com/oauth2/token';
+        Map<String, Object> requestBodyMap = new Map<String, Object>{
+            'refresh_token' => DropBox_Refresh_Token,
+            'grant_type' => 'refresh_token',
+            'client_id' => DropBox_App_Key,
+            'client_secret' => DropBox_App_Secret
+        };
+        String requestBody = JSON.serialize(requestBodyMap); 
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(DropBox_ACCESS_TOKEN_URL);
+        req.setHeader('Content-Type','application/x-www-form-urlencoded');
+        req.setBody(requestBody);
+        req.setMethod('POST');
+        Http http = new Http();
+        System.debug('request = '+req);
+        System.debug('request body = '+req.getBody());
+        HttpResponse res = http.send(req);
+      
+        System.debug(res.getBody());
+
+        JSONParser parser = JSON.createParser(res.getBody());
+        while (parser.nextToken() != null) {
+            if (parser.getCurrentToken() == JSONToken.FIELD_NAME){
+                String fieldName = parser.getCurrentName();
+                String fieldValue = parser.getText();   
+                if (fieldName == 'access_token') {
+                    DropBox_Token = fieldValue; 
+                }            
+            }
+            parser.nextToken();
+        }
     }
     
     @AuraEnabled
@@ -19,7 +59,7 @@ public with sharing class DropBox {
 
     @future(callout=true)
     public static void createFolder(String folderName) {
-
+        setToken();
         String body = '{"path":"/' + folderName + '","autorename":false}';
         HttpRequest req = new HttpRequest();
         req.setEndpoint(DropBox_CreateFolder_URL);
@@ -29,7 +69,7 @@ public with sharing class DropBox {
         req.setBody(body);
         Http http = new Http();
         HttpResponse res = http.send(req);     
-        System.debug('createFoder Status = '+res.getStatus());   
+        System.debug('createFoder Status = '+res.getStatus());
     }
 
     @AuraEnabled
@@ -70,70 +110,6 @@ public with sharing class DropBox {
         public String base64String;
     }
     
-    @future(callout=true)
-    public static void getDropBoxUrl(String folderName) {
-        String dropboxUploadUrl = 'https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings';
-        
-        String dropboxFilePath = '/' + folderName ;  
-        Map <String,Object> settings = new Map<String,Object>{
-            // 'access'=> 'editor',
-            'access'=> 'viewer',
-            'allow_download'=> true,
-            'audience' => 'public',
-            'requested_visibility'=> 'public'
-        };
-        Map<String, Object> requestBodyMap = new Map<String, Object>{
-            'path' => dropboxFilePath,
-            'settings' => settings
-        };  
-        String requestBody = JSON.serialize(requestBodyMap);   
-        
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint(dropboxUploadUrl);
-        req.setHeader('Authorization', 'Bearer ' + DropBox_Token);
-        req.setHeader('Content-Type', 'application/json');
-        req.setMethod('POST');
-        req.setBody(requestBody);
-        Http http = new Http();
-        HttpResponse res = http.send(req);    
-        System.debug('Get Folder Status = '+res.getStatus());   
-        System.debug('Response for folder url = '+ res.getBody()); 
-
-    }
-
-    @future(callout=true)
-    public static void getDropBoxSharedUrl(String folderName) {
-        String dropboxUploadUrl = 'https://api.dropboxapi.com/2/sharing/share_folder';
-        
-        String dropboxFilePath = '/' + folderName ;  
-    
-        Map<String, Object> requestBodyMap = new Map<String, Object>{
-            'access_inheritance' => 'inherit',
-            'acl_update_policy' => 'editors',
-            'force_async' => false,
-            'member_policy' => 'team',
-            'path' => '/'+folderName,
-            'shared_link_policy' => 'anyone'
-            // 'shared_link_policy' => 'members'
-            
-        };  
-        String requestBody = JSON.serialize(requestBodyMap);   
-        
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint(dropboxUploadUrl);
-        req.setHeader('Authorization', 'Bearer ' + DropBox_Token);
-        req.setHeader('Content-Type', 'application/json');
-        req.setMethod('POST');
-        req.setBody(requestBody);
-        Http http = new Http();
-        HttpResponse res = http.send(req);    
-        System.debug('Get Folder Status = '+res.getStatus());   
-        System.debug('Response for shared folder url = '+ res.getBody());
-        String url =  res.getBody().split('"preview_url":')[1];
-        System.debug('Parsed URL = '+ url);
-
-    }
-
     // @future(callout=true)
     public static List<String> listFolder(String folderName) {
         System.debug('Inside Listing');
@@ -170,8 +146,7 @@ public with sharing class DropBox {
         System.debug(fileNames);
         return fileNames;
 
-       
-        
+               
     }
 
     public class Folder {
@@ -259,9 +234,9 @@ public with sharing class DropBox {
 
 
     @AuraEnabled
+    public static String DownloadFile(String folderName , String fileName){
     // public static void DownloadFile(String folderName , String fileName){
         // public static Blob DownloadFile(String folderName , String fileName){
-        public static String DownloadFile(String folderName , String fileName){
         try {
         String dropBoxDownloadUrl = 'https://content.dropboxapi.com/2/files/download';
         String dropboxFilePath = '/' + folderName +'/'+fileName;  
@@ -293,3 +268,16 @@ public with sharing class DropBox {
 }
 
 
+//authorization code
+// DMrQTPu7MKIAAAAAAAAANNVKvGzSim0kkxDKEwlYs1o
+
+
+
+// {"access_token": "sl.ByIsA6Snj9abp3nF6N1IJIihbX8BRDnTjAeyx3R6Np7YbdmF9P3IsPiEgcd69GEQFzbWm8eC10aZC2y3UtS6cXaTvegal7CanQwCyWe7E9jm08pPi7vDkragPqGDqSi5RGZFScbcquoB3m_KK9YN", "token_type": "bearer", "expires_in": 14400, "refresh_token": "Unb0AZw7-ocAAAAAAAAAAcY4_0-PQErfYEzFK7h1UJcgc8ELkGAqlO9b88I87PxR", "scope": "account_info.read account_info.write file_requests.read file_requests.write files.content.read files.content.write files.metadata.read files.metadata.write sharing.read sharing.write", "uid": "1137933091", "account_id": "dbid:AAArLh9AiywGDeF247JJ0QXFdVpVMmieB4k"}
+
+
+// curl https://api.dropbox.com/oauth2/token \
+//    -d refresh_token=<REFRESH TOKEN> \
+//    -d grant_type=refresh_token \
+//    -d client_id=<APP KEY> \
+//    -d client_secret=<APP SECRET>
