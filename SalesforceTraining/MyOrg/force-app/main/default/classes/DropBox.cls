@@ -1,8 +1,7 @@
 public with sharing class DropBox {
     public static final String DropBox_CreateFolder_URL = 'https://api.dropboxapi.com/2/files/create_folder_v2';
 
-    // public static  String DropBox_Token = 'sl.ByIsA6Snj9abp3nF6N1IJIihbX8BRDnTjAeyx3R6Np7YbdmF9P3IsPiEgcd69GEQFzbWm8eC10aZC2y3UtS6cXaTvegal7CanQwCyWe7E9jm08pPi7vDkragPqGDqSi5RGZFScbcquoB3m_KK9YN';
-    public static  String DropBox_Token = '';
+    // public static  String DropBox_Token = '';
     
     public static  String DropBox_Refresh_Token = 'Unb0AZw7-ocAAAAAAAAAAcY4_0-PQErfYEzFK7h1UJcgc8ELkGAqlO9b88I87PxR';
     public static final String DropBox_App_Key = 'hky6aln24sfvfu6';
@@ -15,51 +14,45 @@ public with sharing class DropBox {
 
     }
 
-    public static void setToken(){
-        System.debug('refersh token');
+    @AuraEnabled
+    public static String setToken(){
+        System.debug('Inside refresh token');
+        String access_token;
         String DropBox_ACCESS_TOKEN_URL = 'https://api.dropbox.com/oauth2/token';
-        Map<String, Object> requestBodyMap = new Map<String, Object>{
-            'refresh_token' => DropBox_Refresh_Token,
-            'grant_type' => 'refresh_token',
-            'client_id' => DropBox_App_Key,
-            'client_secret' => DropBox_App_Secret
-        };
-        String requestBody = JSON.serialize(requestBodyMap); 
+       
+        String requestBody = 'grant_type=refresh_token&refresh_token=' + DropBox_Refresh_Token + '&client_id=' + DropBox_App_Key + '&client_secret=' + DropBox_App_Secret;
         HttpRequest req = new HttpRequest();
         req.setEndpoint(DropBox_ACCESS_TOKEN_URL);
         req.setHeader('Content-Type','application/x-www-form-urlencoded');
         req.setBody(requestBody);
         req.setMethod('POST');
         Http http = new Http();
-        System.debug('request = '+req);
-        System.debug('request body = '+req.getBody());
         HttpResponse res = http.send(req);
-      
-        System.debug(res.getBody());
-
         JSONParser parser = JSON.createParser(res.getBody());
         while (parser.nextToken() != null) {
             if (parser.getCurrentToken() == JSONToken.FIELD_NAME){
                 String fieldName = parser.getCurrentName();
-                String fieldValue = parser.getText();   
+                parser.nextToken();
+                String fieldValue = parser.getText();
                 if (fieldName == 'access_token') {
-                    DropBox_Token = fieldValue; 
-                }            
+                    access_token = fieldValue;
+                }
             }
-            parser.nextToken();
+            
         }
+        return access_token;
     }
     
     @AuraEnabled
-    public static void createFolderForRecordId(String recordId) {
+    public static void createFolderForRecordId(String recordId, String DropBox_Token) {
         System.debug('create folder for '+recordId);
-        createFolder(recordId);
+        createFolder(recordId,DropBox_Token);
     }
 
 
     @future(callout=true)
-    public static void createFolder(String folderName) {
-        setToken();
+    public static void createFolder(String folderName,String DropBox_Token) {
+        System.debug('access token = '+ DropBox_Token);
         String body = '{"path":"/' + folderName + '","autorename":false}';
         HttpRequest req = new HttpRequest();
         req.setEndpoint(DropBox_CreateFolder_URL);
@@ -73,13 +66,13 @@ public with sharing class DropBox {
     }
 
     @AuraEnabled
-    public static void uploadFiles(String recordId, String JSONfile) {
+    public static void uploadFiles(String recordId, String JSONfile,String DropBox_Token) {
         File file = (File) System.JSON.deserialize(JSONfile,File.class);
-        uploadFile(recordId,file.name,EncodingUtil.base64Decode(file.base64String));    
+        uploadFile(recordId,file.name,EncodingUtil.base64Decode(file.base64String),DropBox_Token);    
     }
 
     @future(callout=true)
-    public static void uploadFile(String folderName, String fileName,Blob fileData) {
+    public static void uploadFile(String folderName, String fileName,Blob fileData,String DropBox_Token) {
 
         String dropboxUploadUrl = 'https://content.dropboxapi.com/2/files/upload';
         String dropboxFilePath = '/' + folderName + '/' + fileName;    
@@ -111,7 +104,7 @@ public with sharing class DropBox {
     }
     
     // @future(callout=true)
-    public static List<String> listFolder(String folderName) {
+    public static List<String> listFolder(String folderName,String DropBox_Token) {
         System.debug('Inside Listing');
         String dropBoxListingUrl = 'https://api.dropboxapi.com/2/files/list_folder ';
         
@@ -196,9 +189,9 @@ public with sharing class DropBox {
     }
 
     @AuraEnabled
-    public static List<String> FilesListing(String recordId){
+    public static List<String> FilesListing(String recordId,String DropBox_Token){
         try {
-            List<String> fileNames = listFolder(recordId);
+            List<String> fileNames = listFolder(recordId,DropBox_Token);
             return fileNames; 
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
@@ -206,7 +199,7 @@ public with sharing class DropBox {
     }
 
     @AuraEnabled
-    public static void DeleteFile(String folderName , String fileName){
+    public static void DeleteFile(String folderName , String fileName,String DropBox_Token){
         try {
         String dropBoxDeleteUrl = 'https://api.dropboxapi.com/2/files/delete_v2';
         String dropboxFilePath = '/' + folderName +'/'+fileName;  
@@ -234,7 +227,7 @@ public with sharing class DropBox {
 
 
     @AuraEnabled
-    public static String DownloadFile(String folderName , String fileName){
+    public static String DownloadFile(String folderName , String fileName,String DropBox_Token){
     // public static void DownloadFile(String folderName , String fileName){
         // public static Blob DownloadFile(String folderName , String fileName){
         try {
@@ -268,16 +261,3 @@ public with sharing class DropBox {
 }
 
 
-//authorization code
-// DMrQTPu7MKIAAAAAAAAANNVKvGzSim0kkxDKEwlYs1o
-
-
-
-// {"access_token": "sl.ByIsA6Snj9abp3nF6N1IJIihbX8BRDnTjAeyx3R6Np7YbdmF9P3IsPiEgcd69GEQFzbWm8eC10aZC2y3UtS6cXaTvegal7CanQwCyWe7E9jm08pPi7vDkragPqGDqSi5RGZFScbcquoB3m_KK9YN", "token_type": "bearer", "expires_in": 14400, "refresh_token": "Unb0AZw7-ocAAAAAAAAAAcY4_0-PQErfYEzFK7h1UJcgc8ELkGAqlO9b88I87PxR", "scope": "account_info.read account_info.write file_requests.read file_requests.write files.content.read files.content.write files.metadata.read files.metadata.write sharing.read sharing.write", "uid": "1137933091", "account_id": "dbid:AAArLh9AiywGDeF247JJ0QXFdVpVMmieB4k"}
-
-
-// curl https://api.dropbox.com/oauth2/token \
-//    -d refresh_token=<REFRESH TOKEN> \
-//    -d grant_type=refresh_token \
-//    -d client_id=<APP KEY> \
-//    -d client_secret=<APP SECRET>

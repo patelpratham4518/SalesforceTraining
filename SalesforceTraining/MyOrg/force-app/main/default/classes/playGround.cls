@@ -1,12 +1,10 @@
 public with sharing class playGround {
-    static Integer x = 5;
-    public  Integer y = 10;
-
-    public playGround() {
-        
+  public static Integer num = 100;
+  public static void change() {
+      System.debug('Number = '+num);
+      num=200;
     }
-    public static void test(){
-        System.debug('x = '+x);
-           
-    }
+  public static void display() {
+      System.debug('Number = '+num);
+  }
 }

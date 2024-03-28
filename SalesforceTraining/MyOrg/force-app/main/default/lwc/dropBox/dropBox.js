@@ -6,11 +6,13 @@ import  uploadFiles from '@salesforce/apex/DropBox.uploadFiles'
 import  FilesListing from '@salesforce/apex/DropBox.FilesListing'
 import  DeleteFile from '@salesforce/apex/DropBox.DeleteFile'
 import  DownloadFile from '@salesforce/apex/DropBox.DownloadFile'
+import  setToken from '@salesforce/apex/DropBox.setToken'
 
 export default class DropBox extends LightningElement {
     recordId
     @track fileNames = []
     @track fileNamesDataTable
+    DropBox_Token
     columns = [
         { label: 'File', fieldName: 'fileName'},
         {
@@ -40,11 +42,17 @@ export default class DropBox extends LightningElement {
     ]
 
     connectedCallback(){
-        this.getRecordId(window.location.href)
-        createFolderForRecordId({
-            recordId : this.recordId
+        setToken().then(res => {
+            this.DropBox_Token = res
+            console.log(this.DropBox_Token);
+            this.getRecordId(window.location.href)
+            createFolderForRecordId({
+                recordId : this.recordId,
+                DropBox_Token : this.DropBox_Token
+
+            })
+            this.setData()
         })
-        this.setData()
     }
     renderedCallback(){
 
@@ -79,7 +87,9 @@ export default class DropBox extends LightningElement {
             // console.log(jsonFile);
             uploadFiles({
                 recordId : this.recordId,
-                JSONfile : jsonFile
+                JSONfile : jsonFile,
+                DropBox_Token : this.DropBox_Token
+
             }).then((response) => {
                 this.showSuccessToast()
                 console.log("Uploaded");
@@ -114,7 +124,9 @@ export default class DropBox extends LightningElement {
 
     setData(){
         FilesListing({
-            recordId : this.recordId
+            recordId : this.recordId,
+            DropBox_Token : this.DropBox_Token
+
         }).then((response)=>{
             this.fileNames = response
             this.fileNamesDataTable = this.fileNames.map((fileName)=>{
@@ -132,7 +144,9 @@ export default class DropBox extends LightningElement {
         if (actionName === "Delete") {
             DeleteFile({
                 folderName : this.recordId,
-                fileName : fileName
+                fileName : fileName,
+                DropBox_Token : this.DropBox_Token
+
             }).then((response)=>{
                 this.setData()
             })
@@ -140,7 +154,9 @@ export default class DropBox extends LightningElement {
         else if (actionName === "Download") {
             DownloadFile({
                 folderName : this.recordId,
-                fileName : fileName
+                fileName : fileName,
+                DropBox_Token : this.DropBox_Token
+
             }).then((res)=>{
                 console.log(res);
                 //res is base64String from apex
