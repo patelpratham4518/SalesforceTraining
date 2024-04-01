@@ -84,10 +84,13 @@ global with sharing class SalesforceAPI {
             System.debug(req.headers);
             String objectName = req.headers.get('Object');
             String id = req.headers.get('Id');
+            List<String> fields = req.headers.get('fields').split(',');
+
             System.debug(objectName);
             System.debug(id);
+            System.debug(fields);
             
-            String queryString = 'SELECT Name from '+objectName+' where Id =:id';
+            String queryString = 'SELECT '+ String.join(fields,',')+' from '+objectName+' where Id =:id';
             Object record = Database.query(queryString);
             System.debug(record);
             return JSON.serialize(record);
