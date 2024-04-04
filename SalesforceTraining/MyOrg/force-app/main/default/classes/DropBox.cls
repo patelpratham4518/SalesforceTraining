@@ -67,6 +67,7 @@ public with sharing class DropBox {
 
     @AuraEnabled
     public static void uploadFiles(String recordId, String JSONfile,String DropBox_Token) {
+        System.debug('JSON FILE ==> '+JSONfile);
         File file = (File) System.JSON.deserialize(JSONfile,File.class);
         uploadFile(recordId,file.name,EncodingUtil.base64Decode(file.base64String),DropBox_Token);    
     }
@@ -106,7 +107,7 @@ public with sharing class DropBox {
     // @future(callout=true)
     public static List<String> listFolder(String folderName,String DropBox_Token) {
         System.debug('Inside Listing');
-        String dropBoxListingUrl = 'https://api.dropboxapi.com/2/files/list_folder ';
+        String dropBoxListingUrl = 'https://api.dropboxapi.com/2/files/list_folder';
         
         String dropboxFilePath = '/' + folderName ;  
     
@@ -259,5 +260,4 @@ public with sharing class DropBox {
     }
 
 }
-
 

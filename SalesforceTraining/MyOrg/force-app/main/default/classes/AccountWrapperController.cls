@@ -14,7 +14,7 @@ public with sharing class AccountWrapperController {
 
     @AuraEnabled
     public static List<AccountWrapper> getAccountWrappers(){
-        try {
+        
             List<Account> accList = [select Id,Name ,(select Name,Id from Contacts),(select Name,Id from Opportunities)from Account];
            
             List<AccountWrapper> wrapperList = new List<AccountWrapper>();
@@ -29,9 +29,9 @@ public with sharing class AccountWrapperController {
                 }
             }
             return wrapperList;
-        } catch (Exception e) {
-            System.debug('Error message = '+e.getMessage());
-            throw new AuraHandledException(e.getMessage());
-        }
+        
     }
 }
+
+
+

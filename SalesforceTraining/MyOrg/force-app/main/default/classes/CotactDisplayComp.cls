@@ -14,12 +14,10 @@ public with sharing class CotactDisplayComp {
     public static List<Contact> getRelatedContacts(Id accountId){
         
         
-        if (accountId!=null) {
+        
             return [select Id,Name,MobilePhone,Email from Contact where AccountId =:accountId];
-        }
-        else {
-            return null;
-        }
+        
+        
     }
 
     @AuraEnabled

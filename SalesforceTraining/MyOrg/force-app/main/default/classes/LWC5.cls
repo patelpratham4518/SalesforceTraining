@@ -1,6 +1,6 @@
 public with sharing class LWC5 {
     public LWC5() {
-
+        
     }
 
     @AuraEnabled

@@ -11,7 +11,10 @@ public with sharing class LWC6 {
         }
         String selectedString = String.join(selectedList,',');
         String searchquery = 'FIND {'+searchValue+'} IN ALL FIELDS RETURNING '+selectedString;
+        System.debug(searchquery);
         List<List<SObject>> searchList = Search.query(searchquery);
+        System.debug(searchList);
+        
         // Map<String, List<sObject> > recordMap = new Map<String, List<sObject> >();
         // for (Integer i = 0; i < selected.size(); i++) {
         //     recordMap.put(selected[i],searchList[i]);

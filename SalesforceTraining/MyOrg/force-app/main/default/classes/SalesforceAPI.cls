@@ -76,11 +76,11 @@ global with sharing class SalesforceAPI {
     }
 
     @HTTPGet
-    global static String getMethod() {
+    global static void getMethod() {
+        RestRequest req = RestContext.request;
+        RestResponse res = RestContext.response;
         try {
             System.debug('GET method');
-            RestRequest req = RestContext.request;
-            RestResponse res = RestContext.response;
             System.debug(req.headers);
             String objectName = req.headers.get('Object');
             String id = req.headers.get('Id');
@@ -93,14 +93,16 @@ global with sharing class SalesforceAPI {
             String queryString = 'SELECT '+ String.join(fields,',')+' from '+objectName+' where Id =:id';
             Object record = Database.query(queryString);
             System.debug(record);
-            return JSON.serialize(record);
-            // return 'GET calleed';
+            res.addHeader('Content-Type', 'application/json');
+            res.responseBody = Blob.valueOf(JSON.serialize(record));
+            res.statusCode = 200;
             
         } catch (Exception e) {
             System.debug(e.getMessage());
-            return e.getMessage();
+            res.StatusCode = 400;
+            res.addHeader('Content-Type', 'text/plain');
+            res.responseBody = Blob.valueOf(e.getMessage());
         }
     }
 }
-
 

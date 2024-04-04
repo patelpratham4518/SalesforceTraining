@@ -1,8 +1,8 @@
 public with sharing class createContactAura {
     
-    public createContactAura() {
+    // public createContactAura() {
         
-    }
+    // }
     @AuraEnabled
     public static string createContactApex(String FirstName ,String LastName , Integer Mobile,String Email,Id accountId){
         try {
@@ -22,7 +22,7 @@ public with sharing class createContactAura {
             searchString = '%'+searchString+'%';
             List<Account> accountList = [select Id,Name from Account where Name like :searchString limit 5];
             System.debug('accountList');
-          
+
             return accountList; 
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

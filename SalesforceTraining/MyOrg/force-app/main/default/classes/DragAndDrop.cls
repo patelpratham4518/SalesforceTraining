@@ -19,13 +19,11 @@ public with sharing class DragAndDrop {
             Contact contact = [select Id,AccountId from Contact where Id = :contactId];
             contact.AccountId = accountId;
             update contact;
-        
     }
     
     @AuraEnabled
     public static Integer getTotalCount(Id accountId){
-        
-               
+            
             if (accountId != null) {
                 return [select count() from Contact where AccountId = :accountId];
             } else {
