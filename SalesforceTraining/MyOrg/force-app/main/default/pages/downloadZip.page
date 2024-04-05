@@ -1,0 +1,3 @@
+<apex:page controller="DownloadZipController" action="{!downloadZipFile}" contentType="application/zip">
+    <apex:outputText value="{!zipContent}" escape="false"/>
+</apex:page>

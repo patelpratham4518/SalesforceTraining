@@ -1,0 +1,6 @@
+<apex:page standardController="Account" extensions="DownloadPDFController" action="{!downloadPDF}">
+    
+<h1>Download PDF</h1>
+    
+
+</apex:page>
