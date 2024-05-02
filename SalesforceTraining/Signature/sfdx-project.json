@@ -5,7 +5,7 @@
       "default": true
     }
   ],
-  "name": "ScratchOrgDemo",
+  "name": "Signature",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0"

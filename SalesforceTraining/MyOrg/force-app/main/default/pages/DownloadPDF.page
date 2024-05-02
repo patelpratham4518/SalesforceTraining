@@ -1,6 +1,25 @@
 <apex:page standardController="Account" extensions="DownloadPDFController" action="{!downloadPDF}">
-    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script> -->
+    <apex:includeScript value="{!$Resource.jsZip}" />
+    <apex:includeScript value="{!$Resource.jsSaver}" />
 <h1>Download PDF</h1>
-    
+<apex:form>
+    Size of list {!pdfListSize}
+    <apex:outputText rendered="{!NOT(ISBLANK(downloadLink))}">
+        <a href="data:application/zip;base64,{!downloadLink}" download="export.zip">Download</a>
+   </apex:outputText>
+</apex:form>
+ 
+<script>
+    let zip = new JSZip();
 
+    Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.DownloadPDFController.sendpdfMap}',
+                function(map, event) {
+                    let zip = new JSZip();
+                    console.log(map.length);
+                }
+            );
+
+</script>
 </apex:page>

@@ -1,0 +1,126 @@
+<template>
+     <lightning-card icon-name="standard:account" variant="base">
+       <div slot="title">
+           <h1>
+               Register for Student-Teacher Community
+           </h1>
+           <lightning-radio-group name="radioGroup"
+           label="Profile"
+           options={options}
+           value={value}
+           type="button"
+           onchange={handleChange}
+           ></lightning-radio-group>
+       </div>
+       <div slot="actions">
+     
+       </div>
+       <div slot="footer">
+        <template if:false={isUserNameAvailable}>
+            <lightning-button 
+            variant="brand"
+            label="Check UserName" 
+            onclick={checkUserName} 
+            ></lightning-button>
+        </template>
+        <template if:true={isUserNameAvailable}>
+            <lightning-button 
+            variant="brand"
+            label="Register"
+            onclick={register}  
+            ></lightning-button>
+        </template>
+       </div>
+       <div>
+      
+        <template if:true={isStudent}>
+
+            <lightning-radio-group 
+              name="Gender"
+              label="Gender"
+              options={genders}
+              type="button"
+              value={Gender}
+              variant = "standard"
+              onchange={setGender}
+              required="True"
+            ></lightning-radio-group>
+            <lightning-input 
+              type="text"
+              label="First Name"
+              onchange={setFirstName}
+            ></lightning-input>
+            <lightning-input 
+              type="text"
+              label="Last Name"
+              onchange={setLastName}
+              required="True"
+            ></lightning-input>
+            <lightning-input 
+              type="email" 
+              label="Email address"
+              onchange={setEmail}
+              required="True"
+            ></lightning-input>
+            <lightning-input 
+              type="email" 
+              label="Username"
+              onchange={setUserName}
+              required="True"
+            ></lightning-input>
+            <lightning-input 
+              type="password" 
+              label="Password" 
+              value={password}
+              onchange={setPassword}  
+              required="True"
+            ></lightning-input>
+
+        </template>
+        <template if:true={isTeacher}>
+          
+          <lightning-radio-group 
+          name="Gender"
+          label="Gender"
+          options={genders}
+          type="button"
+          value={Gender}
+          variant = "standard"
+          onchange={setGender}
+          required="True"
+        ></lightning-radio-group>
+        <lightning-input 
+          type="text"
+          label="First Name"
+          onchange={setFirstName}
+        ></lightning-input>
+        <lightning-input 
+          type="text"
+          label="Last Name"
+          onchange={setLastName}
+          required="True"
+        ></lightning-input>
+        <lightning-input 
+          type="email" 
+          label="Email address"
+          onchange={setEmail}
+          required="True"
+        ></lightning-input>
+        <lightning-input 
+          type="email" 
+          label="Username"
+          onchange={setUserName}
+          required="True"
+        ></lightning-input>
+        <lightning-input 
+          type="password" 
+          label="Password" 
+          value={password}
+          onchange={setPassword}  
+          required="True"
+        ></lightning-input>
+
+        </template>
+       </div>
+     </lightning-card>
+</template>

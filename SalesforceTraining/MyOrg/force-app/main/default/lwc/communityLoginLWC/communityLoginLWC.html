@@ -1,0 +1,36 @@
+<template>
+    <lightning-card icon-name="standard:user" variant="base">
+      <div slot="title">
+          Login To Experience Cloud
+      </div>
+      <div slot="actions">
+    
+      </div>
+      <div slot="footer">
+        <lightning-button-group>
+          <lightning-button label="Login" onclick={login}  variant="brand"></lightning-button>
+      </lightning-button-group>
+      </div>
+      <div>
+        <lightning-input 
+        type="text"
+        label="Username"
+        placeholder="Enter Username"
+        required="True"
+        onchange={setUsername}
+        ></lightning-input>
+        <lightning-input 
+        type="password"
+        label="Password"
+        placeholder="Enter Password"
+        required="True"
+        onchange={setPassword}
+        ></lightning-input>
+
+      </div>
+    </lightning-card>
+
+    <a href="https://mvclouds-c8-dev-ed.develop.my.site.com/s/login/ForgotPassword">Forgot your password?</a>
+    <br>
+    <a href="https://mvclouds-c8-dev-ed.develop.my.site.com/s/login/SelfRegister">Not a member ?</a>
+</template>
