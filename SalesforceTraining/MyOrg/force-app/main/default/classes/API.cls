@@ -68,12 +68,78 @@ global without sharing class API {
     }
     @HttpDelete
     global static void doDelete() {
+        System.debug('Delete Method');
+        RestRequest request  = RestContext.request;
+        RestResponse response = RestContext.response;
+        System.debug('Request ==>'+request);
+        try {
+            
+            String objectName = request.params.get('object');
+            String id = request.params.get('Id');
+            SObject sObjectInstance = Schema.getGlobalDescribe().get(objectName).newSObject();
+            sObjectInstance.Id = id;
+            delete sObjectInstance;
+            response.statusCode = 200; 
+            response.responseBody = Blob.valueOf('Object deleted succesfully');
+
+        } catch (Exception e) {
+            System.debug('Error ==> ' + e.getMessage());
+            response.statusCode = 400; // Bad request if there was an error
+            response.responseBody = Blob.valueOf('An error occurred: ' + e.getMessage());
+        }
         
     }
+ 
     @HttpPut
     global static void doPut() {
+        System.debug('Put Method');
+        RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response;
+        System.debug('Request ==>' + request);
+        System.debug('Request Body ' + request.requestBody.toString());
         
+        try {
+            Map<String, Object> requestMap = (Map<String, Object>) JSON.deserializeUntyped(request.requestBody.toString());
+            
+            
+            String objectName = request.params.get('object');
+            String recordId = request.params.get('Id');
+            
+            // Retrieve the existing record using object name and ID
+            SObject sObjectInstance = [SELECT Id FROM sObjectType.getSchema(objectName) WHERE Id = :recordId LIMIT 1];
+            
+            if (sObjectInstance == null) {
+                // If no record is found, return a 404 Not Found status code
+                response.statusCode = 404;
+                response.responseBody = Blob.valueOf('Record not found.');
+                return;
+            }
+            
+            // Deserialize the fields from the request body
+            Map<String, Object> fieldsMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(requestMap.get('fields')));
+            
+            // Update the record with the new values from the fields map
+            for (String fieldName : fieldsMap.keySet()) {
+                Object fieldValue = fieldsMap.get(fieldName);
+                sObjectInstance.put(fieldName, fieldValue);
+            }
+            
+            // Perform the update operation
+            update sObjectInstance;
+            
+            // Set response status code and message
+            response.statusCode = 200;
+            response.responseBody = Blob.valueOf('Record updated successfully.');
+            
+        } catch (Exception e) {
+            // Handle exceptions and set an appropriate response status code and message
+            System.debug('Error ==> ' + e.getMessage());
+            response.statusCode = 400;
+            response.responseBody = Blob.valueOf('An error occurred: ' + e.getMessage());
+        }
     }
+
+
     @HttpPatch
     global static void doPatch() {
         
