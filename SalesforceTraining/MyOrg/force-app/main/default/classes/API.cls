@@ -100,48 +100,69 @@ global without sharing class API {
         
         try {
             Map<String, Object> requestMap = (Map<String, Object>) JSON.deserializeUntyped(request.requestBody.toString());
+            Map<String, object> fieldsMap = (Map<String,Object>) JSON.deserializeUntyped(JSON.serialize(requestMap.get('fields')));
             
-            
-            String objectName = request.params.get('object');
-            String recordId = request.params.get('Id');
-            
-            // Retrieve the existing record using object name and ID
-            SObject sObjectInstance = [SELECT Id FROM sObjectType.getSchema(objectName) WHERE Id = :recordId LIMIT 1];
-            
-            if (sObjectInstance == null) {
-                // If no record is found, return a 404 Not Found status code
-                response.statusCode = 404;
-                response.responseBody = Blob.valueOf('Record not found.');
-                return;
+            String objectName = (String)requestMap.get('object');
+            SObject sObjectInstance = Schema.getGlobalDescribe().get(objectName).newSObject();
+            for(String field : fieldsMap.keySet()) {
+                Object fieldValue = fieldsMap.get(field);
+                sObjectInstance.put(field,fieldValue);
             }
-            
-            // Deserialize the fields from the request body
-            Map<String, Object> fieldsMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(requestMap.get('fields')));
-            
-            // Update the record with the new values from the fields map
-            for (String fieldName : fieldsMap.keySet()) {
-                Object fieldValue = fieldsMap.get(fieldName);
-                sObjectInstance.put(fieldName, fieldValue);
-            }
-            
-            // Perform the update operation
-            update sObjectInstance;
-            
-            // Set response status code and message
+            upsert sObjectInstance;
             response.statusCode = 200;
-            response.responseBody = Blob.valueOf('Record updated successfully.');
+            response.responseBody = Blob.valueOf('Record upserted successfully.');
             
         } catch (Exception e) {
-            // Handle exceptions and set an appropriate response status code and message
             System.debug('Error ==> ' + e.getMessage());
             response.statusCode = 400;
             response.responseBody = Blob.valueOf('An error occurred: ' + e.getMessage());
         }
     }
 
+    
 
     @HttpPatch
     global static void doPatch() {
+        System.debug('Patch Method');
+        RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response;
+        System.debug('Request ==>' + request);
+        System.debug('Request Body ' + request.requestBody.toString());
         
+        try {
+            Map<String, Object> requestMap = (Map<String, Object>) JSON.deserializeUntyped(request.requestBody.toString());
+            
+            
+            String objectName = request.params.get('object');
+            String recordId = request.params.get('Id');
+            String queryString = 'SELECT Id FROM '+objectName+ ' WHERE Id=:recordId LIMIT 1';
+
+            SObject sObjectInstance = Database.query(queryString);
+            
+            if (sObjectInstance == null) {
+                response.statusCode = 404;
+                response.responseBody = Blob.valueOf('Record not found.');
+                return;
+            }
+            Map<String, Object> fieldsMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(requestMap.get('fields')));
+            System.debug('fieldsmap ==> '+ fieldsMap);
+            System.debug('fieldsMap ==> '+fieldsMap);
+            for (String fieldName : fieldsMap.keySet()) {
+                Object fieldValue = fieldsMap.get(fieldName);
+                sObjectInstance.put(fieldName, fieldValue);
+            }
+            
+            update sObjectInstance;
+            
+            response.statusCode = 200;
+            response.responseBody = Blob.valueOf('Record updated successfully.');
+            
+        } catch (Exception e) {
+            System.debug('Error ==> ' + e.getMessage());
+            System.debug('Trace ==> '+ e.getStackTraceString());
+            response.statusCode = 400;
+            response.responseBody = Blob.valueOf('An error occurred: ' + e.getMessage());
+        }
+
     }
 }
