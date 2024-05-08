@@ -119,8 +119,6 @@ global without sharing class API {
         }
     }
 
-    
-
     @HttpPatch
     global static void doPatch() {
         System.debug('Patch Method');
