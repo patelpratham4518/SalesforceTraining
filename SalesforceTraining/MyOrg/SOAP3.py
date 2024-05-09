@@ -1,8 +1,11 @@
 import requests
 
 objstring = ""
+# for i in range(1, 11):
+#     objstring += f"           <urn:sObjects xsi:type=\"urn1:Account\">\n                <urn:Name>SOAPPyAccount{i}</urn:Name>\n                <urn:Gender__c>Male</urn:Gender__c>\n            </urn:sObjects>\n"
+
 for i in range(1, 11):
-    objstring += f"           <urn:sObjects xsi:type=\"urn1:Account\">\n                <urn:Name>SOAPPyAccount{i}</urn:Name>\n                <urn:Gender__c>Male</urn:Gender__c>\n            </urn:sObjects>\n"
+    objstring += f" <urn:sObjects xsi:type=\"urn1:Contact\">\n   <urn:LastName>SOAPPyContact{i}</urn:LastName>\n   </urn:sObjects>\n"
 
 
 
