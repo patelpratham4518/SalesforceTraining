@@ -45,6 +45,7 @@ public with sharing class GMAIL_Integration {
 
     @AuraEnabled
     public static String sendEmail(List<String> toEmail, String subject, String message, List<String> attachmentsMap) {
+        System.debug('Send Email called');
         try {
             // Initialize raw email content
             String rawEmail = '';
