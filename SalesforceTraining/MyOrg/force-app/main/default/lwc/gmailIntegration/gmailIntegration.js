@@ -61,26 +61,30 @@ export default class GmailIntegration extends LightningElement {
     @track attachmentsList 
 
     handleUploadFinished(event){
-        
-        const file = event.target.files[0];
-        file.url = URL.createObjectURL(file)
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64String = reader.result
-                .replace('data:', '')
-                .replace(/^.+,/, '');
-            // console.log("base64 = ",base64String);  
-            file.base64String = base64String 
-            this.attachmentsMap.set(file.name,{
-                name : file.name,
-                type : file.type,
-                url : file.url,
-                base64String : file.base64String,
-            })
-            this.attachmentsList = [...this.attachmentsMap.values()]
-              
-        };
-        reader.readAsDataURL(file);
+        try {
+            
+            const file = event.target.files[0];
+            file.url = URL.createObjectURL(file)
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result
+                    .replace('data:', '')
+                    .replace(/^.+,/, '');
+                // console.log("base64 = ",base64String);  
+                file.base64String = base64String 
+                this.attachmentsMap.set(file.name,{
+                    name : file.name,
+                    type : file.type,
+                    url : file.url,
+                    base64String : file.base64String,
+                })
+                this.attachmentsList = [...this.attachmentsMap.values()]
+                  
+            };
+            reader.readAsDataURL(file);
+        } catch (error) {
+            console.log('error creating base64 ==>',error);
+        }
     }
 
     deleteAttach(event){
