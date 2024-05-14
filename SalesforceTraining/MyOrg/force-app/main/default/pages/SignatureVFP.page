@@ -1,0 +1,5 @@
+<apex:page>
+<!-- Begin Default Content REMOVE THIS -->
+<MVSA:SignatureComponent recordId="003J1000001nOrPIAU" SignPadBackgroundColor="rgb(255,255,255)" SignPadInkColor="rgb(0,0,0)"  backgroundcolor="rgb(255,255,255)" Heading="Signature" SubHeading="Sub Heading"/>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>
