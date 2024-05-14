@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>*</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+       <members>*</members>
+       <name>CustomTab</name>
+    </types>
+
+    <!-- <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types> -->
+    <!-- <types>
+        <members>*</members>
+        <name>CustomMetaData</name>
+     </types> -->
+
+ <!-- Till CustomMetadata -->
+
+
+<!-- <types>
+<members>unfiled$public</members>
+<members>unfiled$public/Admitted</members>
+<members>unfiled$public/Contact_Created</members>
+<members>unfiled$public/Contact_updated</members>
+<members>unfiled$public/Happy_Birthday</members>
+<members>unfiled$public/Oppurtunity_changed</members>
+<name>EmailTemplate</name>
+</types> -->
+
+
+<types>
+    <members>Account.Active__c</members>
+    <members>Account.Contact_Count__c</members>
+    <members>Account.CustomerPriority__c</members>
+    <members>Account.Email__c</members>
+    <members>Account.NumberofLocations__c</members>
+    <members>Account.SLA__c</members>
+    <members>Account.SLAExpirationDate__c</members>
+    <members>Account.SLASerialNumber__c</members>
+    <members>Account.UpsellOpportunity__c</members>
+
+    <members>Contact.Birthday_Today__c</members>
+    <members>Contact.Languages__c</members>
+    <members>Contact.Level__c</members>
+    <members>Contact.Minus10minutes__c</members>
+    <members>Contact.Minus59minutes__c</members>
+
+
+    <members>Opportunity.CurrentGenerators__c</members>
+    <members>Opportunity.DeliveryInstallationStatus__c</members>
+    <members>Opportunity.MainCompetitors__c</members>
+    <members>Opportunity.OrderNumber__c</members>
+    <members>Opportunity.TrackingNumber__c</members>
+
+    <members>Case.EngineeringReqNumber__c</members>
+    <members>Case.PotentialLiability__c</members>
+    <members>Case.Product__c</members>
+    <members>Case.SLAViolation__c</members>
+
+    <members>Lead.CurrentGenerators__c</members>
+    <members>Lead.NumberofLocations__c</members>
+    <members>Lead.Primary__c</members>
+    <members>Lead.ProductInterest__c</members>
+    <members>Lead.SICCode__c</members>
+
+    <name>CustomField</name>
+</types>    
+
+<!-- <types>
+    <members>*</members>
+    <name>Workflow</name>
+</types> -->
+
+
+
+<!-- Doubt -->
+<!-- <types>
+    <members>Opportunity.opportunity_stage_changed</members>
+    <name>WorkflowAlert</name>
+</types> -->
+<!-- <types>
+    <members>Opportunity</members>
+    <name>Workflow</name>
+</types> -->
+
+
+
+
+
+
+
+<!-- <types>
+    <members>Student__c-Student Layout</members>
+    <members>Risk_Calculation__c-Risk Calculation Layout</members>
+    <members>Employee__c-Employee Layout</members>
+    <members>Debit__c-Debit Layout</members>
+    <members>Course__c-Course Layout</members>
+    <members>Club__c-Club Layout</members>
+    <members>Book__c-Book Layout</members>
+    <members>Book__c-Book2</members>
+    <name>Layout</name>
+</types> -->
+
+<!-- <types>
+    <members>Account-Account (Marketing) Layout</members>
+    <members>Account-Account (Sales) Layout</members>
+    <members>Account-Account (Support) Layout</members>
+    <members>Account-Account Layout</members>
+    
+    
+    <members>Contact-Contact (Marketing) Layout</members>
+    <members>Contact-Contact (Sales) Layout</members>
+    <members>Contact-Contact (Support) Layout</members>
+    <members>Contact-Contact Layout</members>
+
+    
+    <members>Opportunity-Opportunity (Marketing) Layout</members>
+    <members>Opportunity-Opportunity (Sales) Layout</members>
+    <members>Opportunity-Opportunity (Support) Layout</members>
+    <members>Opportunity-Opportunity Layout</members>
+
+    <name>Layout</name>
+</types> -->
+
+
+<!-- <types>
+    <members>Account-Account Layout</members>
+    <members>Contact-Contact Layout</members>
+    <members>Opportunity-Opportunity Layout</members>
+    <name>Layout</name>
+</types> -->
+
+
+
+<!-- 
+Admin settings -->
+<types>
+    <members>Admin</members>
+    <name>Profile</name>
+</types>
+
+
+
+
+    <version>52.0</version>
+</Package>
