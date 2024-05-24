@@ -8,15 +8,17 @@ public with sharing class GoogleDriveIntegration {
         for ( Template template : templatesWithoutBody) {
             templates.add(getTemplate(template));
         }
+       
         
     }
 
     public static List<GoogleDriveIntegration.Template> getAllDocs() {
+        // System.debug('Get Templates');
         String endpoint = 'callout:GoogleDrive/files';
-        System.debug('Get Templates');
 
         Map<String, String> params = new Map<String, String>();
-        params.put('q','mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"');
+        // params.put('q','mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"');
+        params.put('q','mimeType= "application/vnd.openxmlformats-officedocument.wordprocessingml.document" or mimeType= "application/vnd.google-apps.document"');
 
         String paramString = '';
         for (String key : params.keySet()) {
@@ -48,7 +50,7 @@ public with sharing class GoogleDriveIntegration {
     }
 
     public static GoogleDriveIntegration.Template getTemplate(Template template) {
-        System.debug('Get Template');
+        // System.debug('Get Template');
         String endpoint = 'callout:GoogleDrive/files/'+template.id;
 
         Map<String, String> params = new Map<String, String>();
@@ -69,9 +71,9 @@ public with sharing class GoogleDriveIntegration {
         Http http = new Http();
         HttpResponse response = http.send(request);
 
-        System.debug('Response => '+response);
-        System.debug('Status => '+response.getStatus());
-        System.debug('Body => '+response.getBody());
+        // System.debug('Response => '+response);
+        // System.debug('Status => '+response.getStatus());
+        // System.debug('Body => '+response.getBody());
 
         template.body = response.getBodyAsBlob();
         return template;
