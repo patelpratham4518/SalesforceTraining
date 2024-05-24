@@ -8,8 +8,7 @@ public with sharing class GoogleDriveIntegration {
         for ( Template template : templatesWithoutBody) {
             templates.add(getTemplate(template));
         }
-       
-        
+        System.debug('All templates ==> '+ templates);
     }
 
     public static List<GoogleDriveIntegration.Template> getAllDocs() {
@@ -17,8 +16,7 @@ public with sharing class GoogleDriveIntegration {
         String endpoint = 'callout:GoogleDrive/files';
 
         Map<String, String> params = new Map<String, String>();
-        // params.put('q','mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"');
-        params.put('q','mimeType= "application/vnd.openxmlformats-officedocument.wordprocessingml.document" or mimeType= "application/vnd.google-apps.document"');
+        params.put('q','mimeType="application/vnd.google-apps.document"');
 
         String paramString = '';
         for (String key : params.keySet()) {
@@ -51,10 +49,10 @@ public with sharing class GoogleDriveIntegration {
 
     public static GoogleDriveIntegration.Template getTemplate(Template template) {
         // System.debug('Get Template');
-        String endpoint = 'callout:GoogleDrive/files/'+template.id;
+        String endpoint = 'callout:GoogleDrive/files/'+template.id+'/export';
 
         Map<String, String> params = new Map<String, String>();
-        params.put('alt','media');
+        params.put('mimeType','text/html');
 
         String paramString = '';
         for (String key : params.keySet()) {
@@ -75,14 +73,16 @@ public with sharing class GoogleDriveIntegration {
         // System.debug('Status => '+response.getStatus());
         // System.debug('Body => '+response.getBody());
 
-        template.body = response.getBodyAsBlob();
+        // template.body = response.getBodyAsBlob();
+        template.body = response.getBody();
         return template;
     }
 
     public class Template{
         public String id;
         public String name;
-        public Blob body;
+        // public Blob body;
+        public String body;
     }
 
 
