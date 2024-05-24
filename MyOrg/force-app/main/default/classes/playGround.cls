@@ -3,7 +3,7 @@ public with sharing class playGround {
   public static void change() {
       System.debug('Number = '+num);
       num=200;
-    }
+  }
   public static void display() {
       System.debug('Number = '+num);
   }
